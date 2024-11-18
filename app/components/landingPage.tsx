@@ -45,7 +45,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className="flex flex-col-reverse sm:flex-row justify-between px-6 md:px-16 py-10 overflow-y-hidden">
+      <div className="flex flex-col-reverse sm:flex-row justify-between px-6 md:px-16 py-10 ">
         <div className="mt-24">
           <h1 className="font-bold text-4xl">
             Hi, My Name is{" "}
@@ -81,8 +81,7 @@ const LandingPage = () => {
             <div className="w-1 h-[400px] -top-4 right-40 rotate-45 -z-[1000] bg-yellow-500 absolute"></div>
             <div className="w-1 h-[400px] -top-8 right-40 rotate-45 -z-[1000] bg-yellow-500 absolute"></div>
           </div>
-          {/* <div className="w-1 h-[400px] top-10 right-40 rotate-45 -z-[1000] bg-yellow-500 absolute"></div> */}
-          {/* Other background lines omitted for brevity */}
+
           <Image src={myPhoto} alt="my photo" width={400} height={400} />
         </div>
       </div>

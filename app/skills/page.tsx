@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Footer from "../components/footer";
 
 const MySkills = () => {
   const [showAnimation, setShowAnimation] = useState(false);
@@ -175,6 +176,9 @@ const MySkills = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="mt-16">
+        <Footer />
       </div>
     </>
   );

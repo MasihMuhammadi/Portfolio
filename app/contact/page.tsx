@@ -5,6 +5,7 @@ import { MdLocationPin } from "react-icons/md";
 import { FaPhone, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import ContactInfo from "../components/contactInfo";
 import { LuSend } from "react-icons/lu";
+import Footer from "../components/footer";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -150,6 +151,9 @@ const Contact = () => {
             {feedback}
           </p>
         )}
+      </div>
+      <div className="mt-10 mb-4">
+        <Footer />
       </div>
     </div>
   );

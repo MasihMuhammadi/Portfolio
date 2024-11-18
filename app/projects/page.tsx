@@ -7,6 +7,7 @@ import squadGame from "../../public/squadGame.png";
 import Weather from "../../public/Weather.png";
 import memory from "../../public/memory.png";
 import { useState } from "react";
+import Footer from "../components/footer";
 
 const MyProjects = () => {
   const [projects, setProjects] = useState([
@@ -83,6 +84,9 @@ const MyProjects = () => {
             </div>
           );
         })}
+      </div>
+      <div className="my-4">
+        <Footer />
       </div>
     </>
   );
