@@ -63,21 +63,22 @@ const galleryItems: GalleryItem[] = [
 
 const MyProjects: React.FC = () => {
   const [activeProject, setActiveProject] = useState<number | null>(0);
-  const [screenSize, setScreenSize] = useState<any>();
+  const [screenSize, setScreenSize] = useState<number>(window.innerWidth);
 
+  // Update screen size on resize
   useEffect(() => {
     const handleResize = () => {
       setScreenSize(window.innerWidth);
-      // console.log(window.innerWidth, "Screen Width Changed");
     };
     window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   });
 
   return (
-    <>
+    <div className="overflow-hidden py-10">
       <a
         href="https://github.com/MasihMuhammadi?tab=repositories"
         target="_blank"
@@ -85,79 +86,76 @@ const MyProjects: React.FC = () => {
       >
         See All Projects
       </a>
-      <div className="min-h-screen flex items-start mt-7 justify-start px-4 sm:px-8 md:px-16">
-        <div className="relative p-8 flex flex-wrap justify-center gap-8">
-          {galleryItems.map((item, index) => (
-            <div key={item.id}>
-              {screenSize > 450 ? (
-                <div
-                  className={`absolute transition-all duration-500 ease-in-out w-full   h-auto shadow-md shadow-yellow-500 ${
-                    activeProject === index ? "scale-110 z-20" : "scale-90 z-10"
-                  }`}
-                  style={{
-                    top: activeProject === index ? "10px" : `${index * 60}px`, // Stack or move to the top
-                    left: activeProject === index ? "400px" : `${index * 20}px`, // Move to the right when clicked
-                    zIndex: activeProject === index ? 20 : index, // Bring clicked project to the front
-                    width: activeProject === index ? "800px" : "300px", // Increase width when active
-                    // height: activeProject === index ? "00px" : "100px", // Increase width when active
-                  }}
-                  onClick={
-                    () =>
-                      setActiveProject((prev) =>
-                        prev === index ? null : index
-                      ) // Toggle active project
-                  }
-                >
-                  <div className="relative group overflow-hidden rounded-lg shadow-lg">
-                    <div className="relative">
-                      <Image
-                        src={item.imageSrc}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  {activeProject === index ? (
-                    <a
-                      href={item.link}
-                      className="absolute bottom-5 bg-yellow-500 text-white px-10 py-2 rounded-lg left-[45%]"
-                      target="_blank"
-                    >
-                      Visit
-                    </a>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 px-4 sm:px-10 mt-5">
-                  <div
-                    key={index}
-                    className="bg-black text-white border rounded-xl border-white shadow-sm shadow-yellow-500  p-3 mt-2 text-center flex flex-col items-center justify-center mt-10 scale-1  hover:scale-[1.01] transition-all duration-200"
-                  >
+
+      {screenSize > 450 ? (
+        // Larger screens
+        <div className="min-h-screen flex items-start mt-7 justify-start px-4 sm:px-8 md:px-16">
+          <div className="relative p-8 flex flex-wrap justify-center gap-8">
+            {galleryItems.map((item, index) => (
+              <div
+                key={item.id}
+                className={`absolute transition-all duration-500 ease-in-out w-full h-auto shadow-md shadow-yellow-500 ${
+                  activeProject === index ? "scale-110 z-20" : "scale-90 z-10"
+                }`}
+                style={{
+                  top: activeProject === index ? "10px" : `${index * 60}px`,
+                  left: activeProject === index ? "400px" : `${index * 20}px`,
+                  zIndex: activeProject === index ? 20 : index,
+                  width: activeProject === index ? "800px" : "300px",
+                }}
+                onClick={() =>
+                  setActiveProject((prev) => (prev === index ? null : index))
+                }
+              >
+                <div className="relative group overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative">
                     <Image
                       src={item.imageSrc}
-                      width={400}
-                      height={200}
-                      alt="myPhoto"
+                      alt={item.title}
+                      className="w-full h-full object-cover"
                     />
-                    <p className="text-yellow-600 mt-3">{item.title}</p>
-                    {/* <p>{project.description}</p> */}
-                    <a
-                      className="bg-yellow-500 p-2 px-4 rounded text-black mt-4 hover:scale-95"
-                      href={item.link}
-                      target="_blank"
-                    >
-                      Visit
-                    </a>
                   </div>
                 </div>
-              )}
+                {activeProject === index && (
+                  <a
+                    href={item.link}
+                    className="absolute bottom-5 bg-yellow-500 text-white px-10 py-2 rounded-lg left-[45%]"
+                    target="_blank"
+                  >
+                    Visit
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        // Smaller screens
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-4 sm:px-10 mt-5">
+          {galleryItems.map((item, index) => (
+            <div
+              key={item.id}
+              className="bg-black text-white border rounded-xl border-white shadow-sm shadow-yellow-500 p-3 mt-2 text-center flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
+            >
+              <Image
+                src={item.imageSrc}
+                width={400}
+                height={200}
+                alt={item.title}
+              />
+              <p className="text-yellow-600 mt-3">{item.title}</p>
+              <a
+                className="bg-yellow-500 p-2 px-4 rounded text-black mt-4 hover:scale-95"
+                href={item.link}
+                target="_blank"
+              >
+                Visit
+              </a>
             </div>
           ))}
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 
