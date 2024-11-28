@@ -85,7 +85,7 @@ const Contact = () => {
           />
         </div>
 
-        <div className="bg-transparent  shadow-lg shadow-white p-4 md:p-20 rounded-lg ">
+        <div className="bg-transparent shadow-lg  shadows  p-4 md:p-20 rounded-lg ">
           <h2 className="font-normal text-2xl mb-5 text-center">
             Send Me An Email
           </h2>
@@ -94,7 +94,7 @@ const Contact = () => {
               <input
                 placeholder="Your Name"
                 type="text"
-                className="text-white bg-transparent border-b-2 border-b-white p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
+                className="text-white bg-transparent border-b-2 borders p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
                 id="from_name"
                 name="from_name"
                 value={formData.from_name}
@@ -105,7 +105,7 @@ const Contact = () => {
             <div>
               <input
                 placeholder="Email"
-                className="mt-4 text-white bg-transparent border-b-2 border-b-white p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
+                className="mt-4 text-white bg-transparent border-b-2 borders p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
                 type="email"
                 id="email"
                 name="email"
@@ -119,7 +119,7 @@ const Contact = () => {
                 rows={6}
                 cols={32}
                 placeholder="Message"
-                className="mt-4 text-white bg-transparent border-b-2 border-b-white p-2 resize-none   focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
+                className="mt-4 text-white bg-transparent border-b-2 borders p-2 resize-none   focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
                 id="message"
                 name="message"
                 value={formData.message}
@@ -130,7 +130,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-white text-black p-1 rounded"
+              className="blackBtns p-1 rounded"
             >
               {isSubmitting ? (
                 "Sending..."

@@ -7,6 +7,7 @@ import checkIn from "../../public/check-in-now.png";
 import squadGame from "../../public/squadGame.png";
 import Weather from "../../public/Weather.png";
 import memory from "../../public/memory.png";
+import Footer from "../components/footer";
 
 interface GalleryItem {
   id: number;
@@ -50,14 +51,14 @@ const galleryItems: GalleryItem[] = [
     imageSrc: Weather,
     title: "Weather App",
     description: "Weather App developed with Vue.js",
-    link: "https://masihweather.vercel.app",
+    link: "https://weather-masih.vercel.app/",
   },
   {
     id: 6,
     imageSrc: memory,
     title: "Memory Card Game",
     description: "Simple Memory Game, find 2 same cards",
-    link: "https://masih-memory.vercel.app",
+    link: "https://memory-game-five-beryl.vercel.app/",
   },
 ];
 
@@ -73,7 +74,7 @@ const MyProjects: React.FC = () => {
       >
         See All Projects
       </a>
-      <div className="min-h-screen hidden md:flex items-start mt-7 justify-start px-4 sm:px-8 md:px-16">
+      <div className="min-h-screen hidden lg:flex items-start mt-7 justify-start px-4 sm:px-8 md:px-16">
         <div className="relative p-8 flex flex-wrap justify-center gap-8">
           {galleryItems.map((item, index) => (
             <div
@@ -114,7 +115,7 @@ const MyProjects: React.FC = () => {
         </div>
       </div>
 
-      <div className="sm:grid-cols-1 md:grid-cols-2 lg:hidden  gap-10 px-4 sm:px-10 mt-5">
+      <div className="md:grid-cols-2 lg:hidden  gap-10 px-4 sm:px-10 mt-5">
         {galleryItems.map((item, index) => (
           <div
             key={item.id}
@@ -137,6 +138,7 @@ const MyProjects: React.FC = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

@@ -78,11 +78,11 @@ const MyExperience = () => {
               <h1 className="font-semibold">Meta (Advanced React):</h1>
               <a
                 href="https://coursera.org/share/f528d76ef09d929cb2c9ea3d2bf2200a"
-                className="text-yellow-500 underline"
+                className="text-yellow-500 underline truncate"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                https://coursera.org/share/f528d76ef09d929cb2c9ea3d2bf2200a
+                https://coursera.org/share/MasihMuhammadi
               </a>
             </li>
             <li
@@ -93,12 +93,8 @@ const MyExperience = () => {
               }`}
             >
               <h1 className="font-semibold">AseelApp Experience Letter</h1>
-              <button className="mt-4 bg-white p-2 rounded-lg hover:scale-95">
-                <a
-                  href="/experience letter.pdf"
-                  download
-                  className="text-black"
-                >
+              <button className="mt-4 allYellow p-2 rounded-lg hover:scale-95">
+                <a href="/experience letter.pdf" download className="allYellow">
                   Download Experience letter
                 </a>
               </button>

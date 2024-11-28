@@ -53,17 +53,17 @@ const LandingPage = () => {
           </h1>
           <p className="font-bold text-2xl mt-5">
             a{" "}
-            <span className="text-white inline-block">
+            <span className="allWhite inline-block">
               {displayedText}
               <span className="border-r-4 border-yellow-500 ml-1 animate-blink"></span>
             </span>
             {/* <Magnifier /> */}
           </p>
-          <button className="mt-24 bg-white p-2 scale-100 rounded-lg hover:scale-95">
+          <button className="mt-24 allYellow p-2 scale-100 rounded-lg hover:scale-95">
             <a
               href={"/myCv.pdf"}
               download
-              className="mt-24 bg-white text-black p-2 rounded-lg active:scale-95"
+              className="mt-24 allYellow text-black p-2 rounded-lg active:scale-95"
             >
               Download CV
             </a>

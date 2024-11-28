@@ -80,12 +80,12 @@ const MySkills = () => {
 
   return (
     <>
-      <div className="p-4 md:pr-20">
+      <div className="min-h-screen p-4 md:pr-20 overflow-x-hidden overflow-y-auto">
         {/* Large screen view */}
         <div className="hidden lg:flex justify-between rotate-90 md:rotate-0 mt-[400px] lg:mt-0">
           <div className="px-20 relative">
-            <div className="h-[400px] w-1 bg-white"></div>
-            <div className="w-[800px] h-1 bg-white"></div>
+            <div className="h-[400px] w-1 allBlack"></div>
+            <div className="w-[800px] h-1 allBlack"></div>
             <div>
               {[100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40].map(
                 (level, index) => (
@@ -102,7 +102,7 @@ const MySkills = () => {
             {animatedSkills.map((skill, index) => (
               <div key={index} className="absolute">
                 <div
-                  className="absolute -z-[1000] w-5 transition-all duration-300 rounded bg-yellow-500"
+                  className="absolute -z-[1000] w-5 transition-all duration-300 rounded allYellow"
                   style={{
                     height: skill.initialHeight,
                     left: skill.position.left,
@@ -122,7 +122,7 @@ const MySkills = () => {
             ))}
           </div>
           <div>
-            <div className="flex flex-col mt-20 mr-20 p-10 shadow-sm shadow-white ">
+            <div className="flex flex-col mt-20 mr-20 p-10 shadow-sm shadows ">
               <div className="relative p-6 w-64 bg-white text-black my-2 rounded">
                 <div
                   className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500 ${
