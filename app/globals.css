@@ -5,12 +5,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: blue;
+  --primary: #171717;
   --secondary: #eab308;
   --thirnary: #000;
   --shadow: #eab308;
   --blackAndWhiteBtn: #000;
-  --border: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +37,7 @@
   background-color: var(--blackAndWhiteBtn);
 }
 .borders {
-  border-bottom: 2px solid var(--border);
+  border-bottom: var(--background);
   color: var(--foreground);
 }
 
