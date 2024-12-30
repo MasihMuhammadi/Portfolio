@@ -94,7 +94,7 @@ const Contact = () => {
               <input
                 placeholder="Your Name"
                 type="text"
-                className="text-white bg-transparent border-b-2 borders p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
+                className=" bg-transparent  p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
                 id="from_name"
                 name="from_name"
                 value={formData.from_name}
@@ -105,7 +105,7 @@ const Contact = () => {
             <div>
               <input
                 placeholder="Email"
-                className="mt-4 text-white bg-transparent border-b-2 borders p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
+                className="mt-4  bg-transparent   p-2  focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
                 type="email"
                 id="email"
                 name="email"
@@ -119,7 +119,7 @@ const Contact = () => {
                 rows={6}
                 cols={32}
                 placeholder="Message"
-                className="mt-4 text-white bg-transparent border-b-2 borders p-2 resize-none   focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
+                className="mt-4  bg-transparent border-b  p-2 resize-none   focus-within:border-b-2 rounded-sm focus-within:outline-none  w-full md:w-64 text-sm"
                 id="message"
                 name="message"
                 value={formData.message}

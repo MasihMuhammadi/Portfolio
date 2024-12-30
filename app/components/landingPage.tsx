@@ -3,6 +3,8 @@ import Image from "next/image";
 import myPhoto from "../../public/myPhoto.png";
 import { useEffect, useState } from "react";
 import Magnifier from "./magnifier";
+import clsx from "clsx";
+import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const jobTitles = [
@@ -14,7 +16,7 @@ const LandingPage = () => {
   const [jobIndex, setJobIndex] = useState(0);
   const [letterIndex, setLetterIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-
+  const [nickName, setNickname] = useState("Masihullah Muhammadi");
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100; // Faster speed when deleting
 
@@ -43,21 +45,27 @@ const LandingPage = () => {
     return () => clearTimeout(typingTimeout);
   }, [letterIndex, isDeleting, jobIndex]);
 
+  useEffect(() => {
+    const nick = setTimeout(() => {
+      setNickname("Samurai Coder");
+    }, 5000);
+    return () => clearTimeout(nick);
+  }, []);
+
   return (
     <>
       <div className="flex flex-col-reverse sm:flex-row justify-between px-6 md:px-16 py-10 ">
         <div className="mt-24">
           <h1 className="font-bold text-4xl">
             Hi, My Name is{" "}
-            <span className="text-yellow-500">Masihullah Muhammadi</span>
+            <span className="text-yellow-500 translate-y-5 ">{nickName}</span>
           </h1>
           <p className="font-bold text-2xl mt-5">
             a{" "}
-            <span className="allWhite inline-block">
+            <span className="allyellow inline-block">
               {displayedText}
               <span className="border-r-4 border-yellow-500 ml-1 animate-blink"></span>
             </span>
-            {/* <Magnifier /> */}
           </p>
           <button className="mt-24 allYellow p-2 scale-100 rounded-lg hover:scale-95">
             <a
@@ -85,22 +93,10 @@ const LandingPage = () => {
           <Image src={myPhoto} alt="my photo" width={400} height={400} />
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes blink {
-          0%,
-          50% {
-            opacity: 1;
-          }
-          50%,
-          100% {
-            opacity: 0;
-          }
-        }
-        .animate-blink {
-          animation: blink 0.8s step-end infinite;
-        }
-      `}</style>
+      <motion.div
+        initial={{ backgroundColor: "blue", opacity: 0 }}
+        whileInView={{ backgroundColor: "yellow", opacity: 1 }}
+      />
     </>
   );
 };

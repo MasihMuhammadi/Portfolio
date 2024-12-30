@@ -10,42 +10,6 @@ const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const currentPath = usePathname(); // Automatically updates on route change
 
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => {
-      const root = document.documentElement;
-      if (!prev) {
-        root.style.setProperty("--background", "#0f0f0f");
-        root.style.setProperty("--foreground", "#ededed");
-        root.style.setProperty("--primary", "#ededed");
-      } else {
-        root.style.setProperty("--background", "#ccc");
-        root.style.setProperty("--foreground", "#171717");
-        root.style.setProperty("--primary", "#0f0f0f");
-      }
-      return !prev;
-    });
-  };
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (isDarkMode) {
-      root.style.setProperty("--background", "#0f0f0f");
-      root.style.setProperty("--foreground", "#ededed");
-      root.style.setProperty("--thirnary", "#f0eee9");
-      root.style.setProperty("--shadow", "#f0eee9");
-      root.style.setProperty("--blackAndWhiteBtn", "#f0eee9");
-      root.style.setProperty("--border", "#f0eee9");
-    } else {
-      root.style.setProperty("--background", "#f0eee9");
-      root.style.setProperty("--foreground", "#010125");
-      root.style.setProperty("--thirnary", "#000");
-      root.style.setProperty("--thirnary", "#000");
-      root.style.setProperty("--shadow", "#0f0f0f");
-      root.style.setProperty("--blackAndWhiteBtn", "#0f0f0f");
-      root.style.setProperty("--border", "#000");
-    }
-  }, [isDarkMode]);
-
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
@@ -56,29 +20,7 @@ const Navbar = () => {
           <Logo />
         </Link>
       </div>
-      <div>
-        <button
-          className="relative w-14 h-8 bg-gray-400 rounded-full flex items-center p-1 transition-colors"
-          onClick={toggleTheme}
-        >
-          {/* Sun Icon */}
-          <span className="absolute left-2 text-white">
-            <FaSun size={18} />
-          </span>
 
-          {/* Moon Icon */}
-          <span className="absolute right-2 text-white">
-            <FaMoon size={18} />
-          </span>
-
-          {/* Toggle Ball */}
-          <span
-            className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${
-              isDarkMode ? "translate-x-6" : "translate-x-0"
-            }`}
-          />
-        </button>
-      </div>
       {/* Desktop Menu */}
       <nav className="hidden md:flex mt-5">
         <ul className="flex gap-x-8 text-[15px]">
