@@ -4,7 +4,6 @@ import myPhoto from "../../public/myPhoto.png";
 import { useEffect, useState } from "react";
 import Magnifier from "./magnifier";
 import clsx from "clsx";
-import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const jobTitles = [
@@ -93,10 +92,6 @@ const LandingPage = () => {
           <Image src={myPhoto} alt="my photo" width={400} height={400} />
         </div>
       </div>
-      <motion.div
-        initial={{ backgroundColor: "blue", opacity: 0 }}
-        whileInView={{ backgroundColor: "yellow", opacity: 1 }}
-      />
     </>
   );
 };
