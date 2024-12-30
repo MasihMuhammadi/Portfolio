@@ -2,8 +2,6 @@
 import Image from "next/image";
 import myPhoto from "../../public/myPhoto.png";
 import { useEffect, useState } from "react";
-import Magnifier from "./magnifier";
-import clsx from "clsx";
 
 const LandingPage = () => {
   const jobTitles = [
