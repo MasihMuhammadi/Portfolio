@@ -7,6 +7,7 @@ import checkIn from "../../public/check-in-now.png";
 import squadGame from "../../public/squadGame.png";
 import Weather from "../../public/Weather.png";
 import memory from "../../public/memory.png";
+import chatApp from "../../public/chat-app.png";
 import Footer from "../components/footer";
 
 interface GalleryItem {
@@ -18,6 +19,13 @@ interface GalleryItem {
 }
 
 const galleryItems: GalleryItem[] = [
+  {
+    id: 3,
+    imageSrc: checkIn,
+    title: "Automated attendance",
+    description: "School Management system, with automated attendance feature ",
+    link: "https://check-in-now.vercel.app",
+  },
   {
     id: 1,
     imageSrc: reserv,
@@ -31,13 +39,6 @@ const galleryItems: GalleryItem[] = [
     title: "Build Resume",
     description: "Project for creating dynamic Resume use templates",
     link: "https://buildResume.vercel.app",
-  },
-  {
-    id: 3,
-    imageSrc: checkIn,
-    title: "Automated attendance",
-    description: "School Management system, with automated attendance feature ",
-    link: "https://check-in-now.vercel.app",
   },
   {
     id: 4,
@@ -59,6 +60,14 @@ const galleryItems: GalleryItem[] = [
     title: "Memory Card Game",
     description: "Simple Memory Game, find 2 same cards",
     link: "https://memory-game-five-beryl.vercel.app/",
+  },
+  {
+    id: 7,
+    imageSrc: chatApp,
+    title: "Chat Application",
+    description:
+      "Real-time chat app Use NextJs, Typescript, Node.js & socket.io",
+    link: "https://chattome.vercel.app/",
   },
 ];
 

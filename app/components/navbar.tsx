@@ -76,7 +76,7 @@ const Navbar = () => {
       </nav>
 
       {/* Burger Icon for Mobile Menu */}
-      <div className="md:hidden z-[1000000]">
+      <div className="md:hidden z-[1000000]  allWhite ">
         <button onClick={toggleMenu} aria-label="Toggle Menu">
           {isOpen ? (
             <FaTimes size={24} />

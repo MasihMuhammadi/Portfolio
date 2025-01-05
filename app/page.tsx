@@ -6,9 +6,9 @@ import Footer from "./components/footer";
 
 export default function Home() {
   return (
-    <div className={`overflow-hidden `}>
+    <div className={`overflow-hidden  py-0 my-0 `}>
       <LandingPage />
-      <div className="mt-5">
+      <div className=" overflow-x-hidden py-10">
         <Footer />
       </div>
     </div>

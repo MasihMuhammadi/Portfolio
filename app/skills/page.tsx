@@ -54,6 +54,13 @@ const MySkills = () => {
       level: 70,
       position: { left: "700px", top: "-262px" },
     },
+    {
+      title: "UI/UX Figma",
+      initialHeight: "0px",
+      targetHeight: "290px",
+      level: 80,
+      position: { left: "800px", top: "-292px" },
+    },
   ];
 
   const [animatedSkills, setAnimatedSkills] = useState(skills);
@@ -80,12 +87,12 @@ const MySkills = () => {
 
   return (
     <>
-      <div className="min-h-screen p-4 md:pr-20 overflow-x-hidden overflow-y-auto">
+      <div className=" p-4 md:pr-20 overflow-x-hidden overflow-y-auto hidden-scroll">
         {/* Large screen view */}
-        <div className="hidden lg:flex justify-between rotate-90 md:rotate-0 mt-[400px] lg:mt-0">
+        <div className="hidden lg:flex justify-between rotate-90 md:rotate-0 mt-[400px] lg:mt-0 mb-10 ">
           <div className="px-20 relative">
             <div className="h-[400px] w-1 allBlack"></div>
-            <div className="w-[800px] h-1 allBlack"></div>
+            <div className="w-[900px] h-1 allBlack"></div>
             <div>
               {[100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40].map(
                 (level, index) => (
@@ -126,7 +133,7 @@ const MySkills = () => {
               <div className="relative p-6 w-64 bg-white text-black my-2 rounded">
                 <div
                   className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500 ${
-                    showAnimation ? "w-[75%] " : "w-0 "
+                    showAnimation ? "w-[85%] " : "w-0 "
                   }`}
                 >
                   Frontend
@@ -135,10 +142,19 @@ const MySkills = () => {
               <div className="relative   p-6 w-64 bg-white text-black rounded">
                 <div
                   className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500  ${
-                    showAnimation ? "w-[50%]" : "w-0"
+                    showAnimation ? "w-[70%]" : "w-0"
                   }`}
                 >
                   Backend
+                </div>
+              </div>
+              <div className="relative mt-2  p-6 w-64 bg-white text-black rounded">
+                <div
+                  className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500  ${
+                    showAnimation ? "w-[60%]" : "w-0"
+                  }`}
+                >
+                  UI/UX
                 </div>
               </div>
             </div>
@@ -152,8 +168,11 @@ const MySkills = () => {
               <span className="w-24 text-sm">{skill.title}</span>
               <div className="w-full bg-gray-300 rounded h-2 mx-2 relative">
                 <div
-                  className="bg-yellow-500 h-2 rounded transition-all duration-1000"
-                  style={{ width: `${skill.level}%` }}
+                  className="bg-yellow-500 h-2 rounded transition-all duration-300"
+                  style={{
+                    width:
+                      showAnimation && skill.level ? `${skill.level}%` : "0%",
+                  }}
                 ></div>
                 <span className="absolute right-0 top-[-18px] text-xs text-white">
                   {skill.level}%
@@ -169,7 +188,9 @@ const MySkills = () => {
             <div
               key={index}
               className="flex items-center justify-between px-4 py-2 bg-yellow-500 text-black rounded-md shadow-md transition-all duration-700 transform"
-              style={{ width: `${skill.level}%` }}
+              style={{
+                width: showAnimation && skill.level ? `${skill.level}%` : "0%",
+              }}
             >
               <span className="text-sm font-semibold">{skill.title}</span>
               <span className="text-sm">{skill.level}%</span>
@@ -177,7 +198,7 @@ const MySkills = () => {
           ))}
         </div>
       </div>
-      <div className="mt-16">
+      <div className=" overflow-x-hidden ">
         <Footer />
       </div>
     </>
