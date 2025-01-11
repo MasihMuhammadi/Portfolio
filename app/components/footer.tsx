@@ -55,7 +55,7 @@ const Footer = () => {
     <>
       <div className="border-t-[0.1px] border-t-white  flex sm:flex-row-reverse flex-col items-center pt-5 justify-around gap-x-20 gap-y-5 ">
         <div>
-          <button
+          {/* <button
             className="relative w-10 h-10 text-center allYellow  rounded-full flex items-center justify-center p-1  transition-colors"
             onClick={toggleTheme}
           >
@@ -68,7 +68,7 @@ const Footer = () => {
                 <FaMoon size={18} />
               </span>
             )}
-          </button>
+          </button> */}
         </div>
         <div className="flex flex-row gap-x-10 text-sm">
           <Link href="/">About</Link>
