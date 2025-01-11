@@ -59,7 +59,7 @@ const MySkills = () => {
       initialHeight: "0px",
       targetHeight: "290px",
       level: 80,
-      position: { left: "800px", top: "-292px" },
+      position: { left: "820px", top: "-292px" },
     },
   ];
 
