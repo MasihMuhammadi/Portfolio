@@ -1,6 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import reserv from "../../public/reserv.png";
 import buildResume from "../../public/buildResume.png";
 import checkIn from "../../public/check-in-now.png";
@@ -9,6 +11,9 @@ import Weather from "../../public/Weather.png";
 import memory from "../../public/memory.png";
 import chatApp from "../../public/chat-app.png";
 import Footer from "../components/footer";
+
+// Register the ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 interface GalleryItem {
   id: number;
@@ -73,6 +78,61 @@ const galleryItems: GalleryItem[] = [
 
 const MyProjects: React.FC = () => {
   const [activeProject, setActiveProject] = useState<number | null>(0);
+  const galleryRefs: any = useRef<any>([]);
+
+  useEffect(() => {
+    // GSAP animation for scroll-triggered animation on gallery items
+    galleryRefs.current.forEach((el: any, index: number) => {
+      gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          y: 100, // Start position below
+        },
+        {
+          opacity: 1,
+          y: 0, // End position at normal
+          duration: 1,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%", // Start the animation when the item reaches 80% of the viewport height
+            end: "bottom 20%",
+            scrub: true,
+          },
+        }
+      );
+    });
+
+    // Unique hover effect animation (scale and rotate only on hover)
+    galleryItems.forEach((item, index) => {
+      const imageElement = galleryRefs.current[index]?.querySelector("img");
+      if (imageElement) {
+        gsap.fromTo(
+          imageElement,
+          {
+            scale: 1,
+            rotation: 0,
+          },
+          {
+            scale: 1.1,
+            rotation: 15, // Rotate only on hover
+            ease: "power1.out",
+            paused: true,
+            duration: 0.5,
+          }
+        );
+
+        // Adding hover trigger
+        imageElement.addEventListener("mouseenter", () => {
+          gsap.to(imageElement, { scale: 1.1, rotation: 15, duration: 0.3 });
+        });
+
+        imageElement.addEventListener("mouseleave", () => {
+          gsap.to(imageElement, { scale: 1, rotation: 0, duration: 0.3 });
+        });
+      }
+    });
+  }, []);
 
   return (
     <div className="overflow-hidden py-10">
@@ -88,6 +148,7 @@ const MyProjects: React.FC = () => {
           {galleryItems.map((item, index) => (
             <div
               key={item.id}
+              ref={(el: any) => (galleryRefs.current[index] = el)}
               className={`absolute transition-all duration-500 ease-in-out w-full h-auto shadow-md shadow-yellow-500 ${
                 activeProject === index ? "scale-110 z-20" : "scale-90 z-10"
               }`}
@@ -124,16 +185,19 @@ const MyProjects: React.FC = () => {
         </div>
       </div>
 
-      <div className="md:grid-cols-2 lg:hidden  gap-10 px-4 sm:px-10 mt-5">
-        {galleryItems.map((item, index) => (
+      {/* Mobile Gallery with GSAP ScrollTrigger Animation */}
+      <div className="md:grid-cols-2 lg:hidden gap-10 px-4 sm:px-10 mt-5 my-16">
+        {galleryItems.map((item: any, index) => (
           <div
             key={item.id}
+            ref={(el: any) => (galleryRefs.current[index] = el)}
             className="bg-black text-white border rounded-xl border-white shadow-sm shadow-yellow-500 p-3 mt-2 text-center flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
           >
             <Image
               src={item.imageSrc}
-              width={400}
-              height={200}
+              // width={400}
+              // height={200}
+              className="w-auto h-auto rounded-md"
               alt={item.title}
             />
             <p className="text-yellow-600 mt-3">{item.title}</p>

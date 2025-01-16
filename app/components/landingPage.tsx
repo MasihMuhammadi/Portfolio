@@ -1,13 +1,16 @@
 "use client";
 import Image from "next/image";
-import myPhoto from "../../public/myPhoto.png";
+import myPhoto from "../../public/myImage.png";
 import { useEffect, useState } from "react";
 import Contra from "./contra";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { FaArrowDown } from "react-icons/fa6";
+import StaggerExample from "./straggerExample";
+import gsap from "gsap";
 
 const LandingPage = () => {
+  const [toggleIt, setToggleIt] = useState(false);
   const jobTitles = [
     "Front-end Web Developer",
     "Back-end Web Developer",
@@ -68,17 +71,15 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className="flex flex-col-reverse sm:flex-row justify-between px-6 md:px-16 py-10 ">
+      <div className="flex flex-col-reverse sm:flex-row justify-between px-6 md:px-16 py-10 relative">
         <div className="mt-24">
-          <h1 className="font-bold text-4xl">
-            Hi, My Name is{" "}
-            <span className="text-yellow-500 translate-y-5 ">
-              Masihullah Muhammadi
-            </span>
-          </h1>
-          <p className="font-bold text-2xl mt-5">
+          <h1 className="font-bold text-4xl">Hi, My Name is </h1>
+          <span className=" ">
+            <StaggerExample />
+          </span>
+          <p className="font-bold text-2xl mt-7">
             a{" "}
-            <span className="allyellow inline-block">
+            <span className="allyellow inline-block text-xl">
               {displayedText}
               <span className="border-r-4 border-yellow-500 ml-1 animate-blink"></span>
             </span>
@@ -143,7 +144,7 @@ const LandingPage = () => {
             {Array.from({ length: 8 }, (_, index) => (
               <div
                 key={index}
-                className="w-1 h-[400px] right-40 rotate-45 -z-[1000] bg-yellow-500 absolute"
+                className="w-1 h-[400px] right-40  rotate-45 -z-[1000] bg-yellow-500 absolute"
                 style={{ top: `calc(70px - ${index * 4}%)` }}
               ></div>
             ))}
@@ -151,10 +152,10 @@ const LandingPage = () => {
 
           <Image
             draggable={false}
-            className="select-none"
+            className="select-none -mt-16"
             src={myPhoto}
             alt="my photo"
-            width={400}
+            width={600}
             height={400}
           />
         </div>

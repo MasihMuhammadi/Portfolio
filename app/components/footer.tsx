@@ -9,6 +9,7 @@ import {
   FaSun,
   FaWhatsapp,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +54,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className="border-t-[0.1px] border-t-white  flex sm:flex-row-reverse flex-col items-center pt-5 justify-around gap-x-20 gap-y-5 ">
+      <div className="border-t-[0.1px] border-t-white  flex sm:flex-row-reverse flex-col items-center pt-5 justify-around gap-x-20 gap-y-5 overflow-x-hidden">
         <div>
           {/* <button
             className="relative w-10 h-10 text-center allYellow  rounded-full flex items-center justify-center p-1  transition-colors"
@@ -70,7 +71,7 @@ const Footer = () => {
             )}
           </button> */}
         </div>
-        <div className="flex flex-row gap-x-10 text-sm">
+        <div className="flex flex-row gap-x-6 sm:gap-x-10 text-[10px] sm:text-sm">
           <Link href="/">About</Link>
           <Link href="/skills">Skills</Link>
           <Link href="/projects">Project</Link>
@@ -78,11 +79,11 @@ const Footer = () => {
           <Link href="/contact">Contact</Link>
         </div>
         <div className="flex gap-x-10">
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-2 text-[12px]">
             <b>&copy;</b>
             <p>Masihullah Muhammadi</p>
           </div>
-          <div className="flex gap-x-7">
+          <div className="flex gap-x-6">
             <a href="https://github.com/MasihMuhammadi" target="_blank">
               <FaGithub />
             </a>
@@ -92,11 +93,14 @@ const Footer = () => {
             >
               <FaLinkedin />
             </a>
-            <a
+            {/* <a
               href="https://wa.me/+93749102015?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20portfolio."
               target="_blank"
             >
               <FaWhatsapp />
+            </a> */}
+            <a href="https://x.com/MasihMuhammadi" target="_blank">
+              <FaXTwitter />
             </a>
           </div>
         </div>

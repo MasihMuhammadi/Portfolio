@@ -1,16 +1,25 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import Logo from "@/public/logo";
+import useMenuListAnimation from "./hooks/useNavbarAnimation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const currentPath = usePathname(); // Automatically updates on route change
 
+  const menuRef = useRef<HTMLDivElement>(null); // Reference for scope
+
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    if (isOpen) {
+      useMenuListAnimation(menuRef, 0.5); // Set a delay before showing the links (0.5 seconds delay)
+    }
+  }, [isOpen]); // Only trigger animation when the menu state changes to open
 
   return (
     <div className="flex justify-between items-center p-6 ">
@@ -76,14 +85,14 @@ const Navbar = () => {
       </nav>
 
       {/* Burger Icon for Mobile Menu */}
-      <div className="md:hidden z-[1000000]  allWhite ">
+      <div className="md:hidden z-[1000000] allWhite">
         <button onClick={toggleMenu} aria-label="Toggle Menu">
           {isOpen ? (
-            <FaTimes size={24} />
+            <FaTimes size={24} color="white" />
           ) : (
             <>
-              <div className="allBlack w-6 h-1  rounded"></div>
-              <div className="allBlack w-4 h-1  rounded mt-1"></div>
+              <div className="allBlack w-6 h-1 rounded"></div>
+              <div className="allBlack w-4 h-1 rounded mt-1"></div>
             </>
           )}
         </button>
@@ -91,7 +100,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-slate-950 text-white transform z-[100000] ${
+        className={`fixed top-0 left-0 w-full h-full bg-black text-white transform z-[100000] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
@@ -102,10 +111,14 @@ const Navbar = () => {
             </Link>
           </span>
         </div>
-        <nav className="flex flex-col items-center mt-10 space-y-6">
+        <nav
+          className="flex flex-col items-center mt-10 space-y-6"
+          ref={menuRef}
+        >
           <Link
             href="/"
             onClick={toggleMenu}
+            id="menu-list-item"
             className={
               currentPath === "/" ? "text-yellow-500 border-b-yellow-500" : ""
             }
@@ -115,6 +128,7 @@ const Navbar = () => {
           <Link
             href="/skills"
             onClick={toggleMenu}
+            id="menu-list-item"
             className={
               currentPath === "/skills"
                 ? "text-yellow-500 border-b-yellow-500"
@@ -126,6 +140,7 @@ const Navbar = () => {
           <Link
             href="/experiences"
             onClick={toggleMenu}
+            id="menu-list-item"
             className={
               currentPath === "/experiences"
                 ? "text-yellow-500 border-b-yellow-500"
@@ -137,6 +152,7 @@ const Navbar = () => {
           <Link
             href="/projects"
             onClick={toggleMenu}
+            id="menu-list-item"
             className={
               currentPath === "/projects"
                 ? "text-yellow-500 border-b-yellow-500"
@@ -148,6 +164,7 @@ const Navbar = () => {
           <Link
             href="/contact"
             onClick={toggleMenu}
+            id="menu-list-item"
             className={`bg-yellow-500 p-3 rounded-md text-black ${
               currentPath === "/contact"
                 ? "text-yellow-500 border-b-yellow-500"

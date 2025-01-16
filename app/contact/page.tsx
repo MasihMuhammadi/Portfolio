@@ -2,10 +2,17 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { MdLocationPin } from "react-icons/md";
-import { FaPhone, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import {
+  FaPhone,
+  FaGithub,
+  FaLinkedin,
+  FaWhatsapp,
+  FaTwitter,
+} from "react-icons/fa";
 import ContactInfo from "../components/contactInfo";
 import { LuSend } from "react-icons/lu";
 import Footer from "../components/footer";
+import { FaX, FaXTwitter } from "react-icons/fa6";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -57,11 +64,21 @@ const Contact = () => {
       {/* <h1>Contact me</h1> */}
       <div className="flex flex-col-reverse md:flex-row  justify-center gap-x-64 mt-14">
         <div className="flex flex-col gap-10  mt-14 sm:mt-0">
-          <ContactInfo
+          {/* <ContactInfo
             icon={<MdLocationPin size={30} />}
             text="Panjsad Family, Khair Khana, Kabul Afghanistan"
+          /> */}
+          {/* <ContactInfo icon={<FaPhone size={30} />} text="+93749102015" /> */}
+          <ContactInfo
+            icon={<FaXTwitter size={30} />}
+            text={
+              <>
+                <a href="https://x.com/MasihMuhammadi" target="_blank">
+                  Masih Muhammadi
+                </a>
+              </>
+            }
           />
-          <ContactInfo icon={<FaPhone size={30} />} text="+93749102015" />
           <ContactInfo
             icon={<FaGithub size={30} />}
             text={
@@ -81,11 +98,11 @@ const Contact = () => {
               >
                 Masihullah Muhammadi Linkedin
               </a>
-            } // Change to your actual LinkedIn URL
+            }
           />
         </div>
 
-        <div className="bg-transparent shadow-lg  shadows  p-4 md:p-20 rounded-lg ">
+        <div className="bg-transparent shadow-lg  shadows  p-4 md:p-20 rounded-lg mx-6 sm:mx-2">
           <h2 className="font-normal text-2xl mb-5 text-center">
             Send Me An Email
           </h2>
