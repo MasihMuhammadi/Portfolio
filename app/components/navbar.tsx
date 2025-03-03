@@ -74,10 +74,7 @@ const Navbar = () => {
                 : ""
             }`}
           >
-            <Link
-              href="/contact"
-              className="px-3 text-black blackBtns py-3 rounded-md"
-            >
+            <Link href="/contact" className="px-3  blackBtns py-3 rounded-md">
               Get In Touch
             </Link>
           </li>
@@ -166,9 +163,7 @@ const Navbar = () => {
             onClick={toggleMenu}
             id="menu-list-item"
             className={`bg-yellow-500 p-3 rounded-md text-black ${
-              currentPath === "/contact"
-                ? "text-yellow-500 border-b-yellow-500"
-                : ""
+              currentPath === "/contact" ? " border-b-yellow-500" : ""
             }`}
           >
             Get In Touch

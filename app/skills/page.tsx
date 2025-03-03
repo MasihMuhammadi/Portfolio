@@ -162,7 +162,7 @@ const MySkills = () => {
         </div>
 
         {/* Medium screen view */}
-        <div className="hidden md:flex lg:hidden flex-wrap gap-4 mt-20">
+        <div className="hidden md:flex lg:hidden flex-wrap gap-4 my-20">
           {animatedSkills.map((skill, index) => (
             <div key={index} className="flex items-center w-full">
               <span className="w-24 text-sm">{skill.title}</span>
@@ -174,7 +174,7 @@ const MySkills = () => {
                       showAnimation && skill.level ? `${skill.level}%` : "0%",
                   }}
                 ></div>
-                <span className="absolute right-0 top-[-18px] text-xs text-white">
+                <span className="absolute right-0 top-[-18px] text-xs ">
                   {skill.level}%
                 </span>
               </div>

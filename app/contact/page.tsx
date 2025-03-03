@@ -62,8 +62,8 @@ const Contact = () => {
   return (
     <div>
       {/* <h1>Contact me</h1> */}
-      <div className="flex flex-col-reverse md:flex-row  justify-center gap-x-64 mt-14">
-        <div className="flex flex-col gap-10  mt-14 sm:mt-0">
+      <div className="flex flex-col-reverse lg:flex-row items-center  justify-center md:gap-x-10 lg:gap-x-64 mt-14">
+        <div className="flex flex-col gap-10  mt-14 sm:mt-4">
           {/* <ContactInfo
             icon={<MdLocationPin size={30} />}
             text="Panjsad Family, Khair Khana, Kabul Afghanistan"

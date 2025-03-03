@@ -10,6 +10,7 @@ import squadGame from "../../public/squadGame.png";
 import Weather from "../../public/Weather.png";
 import memory from "../../public/memory.png";
 import chatApp from "../../public/chat-app.png";
+import iu from "../../public/iu.png";
 import Footer from "../components/footer";
 
 // Register the ScrollTrigger plugin
@@ -24,6 +25,13 @@ interface GalleryItem {
 }
 
 const galleryItems: GalleryItem[] = [
+  {
+    id: 8,
+    imageSrc: iu,
+    title: "Industry Umbrella",
+    description: "E-commerce website",
+    link: "https://iu-fast.vercel.app",
+  },
   {
     id: 3,
     imageSrc: checkIn,
@@ -184,7 +192,6 @@ const MyProjects: React.FC = () => {
           ))}
         </div>
       </div>
-
       {/* Mobile Gallery with GSAP ScrollTrigger Animation */}
       <div className="md:grid-cols-2 lg:hidden gap-10 px-4 sm:px-10 mt-5 my-16">
         {galleryItems.map((item: any, index) => (
@@ -211,7 +218,7 @@ const MyProjects: React.FC = () => {
           </div>
         ))}
       </div>
-      <Footer />
+      // <Footer />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { FaArrowDown } from "react-icons/fa6";
 import StaggerExample from "./straggerExample";
 import gsap from "gsap";
+import LampPullCord from "./lampanimation";
 
 const LandingPage = () => {
   const [toggleIt, setToggleIt] = useState(false);
@@ -108,7 +109,7 @@ const LandingPage = () => {
               >
                 Book a Call
               </a>
-              <motion.div
+              {/* <motion.div
                 className="w-auto h-auto z-[-1000]"
                 animate={{
                   scale: [1, 1.06, 1],
@@ -134,7 +135,7 @@ const LandingPage = () => {
                     />
                   </svg>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </motion.button>
           </div>
         </div>
