@@ -13,7 +13,6 @@ import chatApp from "../../public/chat-app.png";
 import iu from "../../public/iu.png";
 import Footer from "../components/footer";
 
-// Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 interface GalleryItem {
@@ -89,21 +88,20 @@ const MyProjects: React.FC = () => {
   const galleryRefs: any = useRef<any>([]);
 
   useEffect(() => {
-    // GSAP animation for scroll-triggered animation on gallery items
     galleryRefs.current.forEach((el: any, index: number) => {
       gsap.fromTo(
         el,
         {
           opacity: 0,
-          y: 100, // Start position below
+          y: 100,
         },
         {
           opacity: 1,
-          y: 0, // End position at normal
+          y: 0,
           duration: 1,
           scrollTrigger: {
             trigger: el,
-            start: "top 80%", // Start the animation when the item reaches 80% of the viewport height
+            start: "top 80%",
             end: "bottom 20%",
             scrub: true,
           },
@@ -111,7 +109,6 @@ const MyProjects: React.FC = () => {
       );
     });
 
-    // Unique hover effect animation (scale and rotate only on hover)
     galleryItems.forEach((item, index) => {
       const imageElement = galleryRefs.current[index]?.querySelector("img");
       if (imageElement) {
@@ -123,14 +120,13 @@ const MyProjects: React.FC = () => {
           },
           {
             scale: 1.1,
-            rotation: 15, // Rotate only on hover
+            rotation: 15,
             ease: "power1.out",
             paused: true,
             duration: 0.5,
           }
         );
 
-        // Adding hover trigger
         imageElement.addEventListener("mouseenter", () => {
           gsap.to(imageElement, { scale: 1.1, rotation: 15, duration: 0.3 });
         });
@@ -192,7 +188,6 @@ const MyProjects: React.FC = () => {
           ))}
         </div>
       </div>
-      {/* Mobile Gallery with GSAP ScrollTrigger Animation */}
       <div className="md:grid-cols-2 lg:hidden gap-10 px-4 sm:px-10 mt-5 my-16">
         {galleryItems.map((item: any, index) => (
           <div
@@ -202,8 +197,6 @@ const MyProjects: React.FC = () => {
           >
             <Image
               src={item.imageSrc}
-              // width={400}
-              // height={200}
               className="w-auto h-auto rounded-md"
               alt={item.title}
             />
@@ -218,7 +211,7 @@ const MyProjects: React.FC = () => {
           </div>
         ))}
       </div>
-      // <Footer />
+      <Footer />
     </div>
   );
 };
