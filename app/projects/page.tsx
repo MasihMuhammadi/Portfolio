@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
@@ -11,8 +12,8 @@ import Weather from "../../public/Weather.png";
 import memory from "../../public/memory.png";
 import chatApp from "../../public/chat-app.png";
 import iu from "../../public/iu.png";
-import Footer from "../components/footer";
-
+import craxy from "../../public/craxy.png";
+import Button from "../components/button";
 gsap.registerPlugin(ScrollTrigger);
 
 interface GalleryItem {
@@ -22,8 +23,14 @@ interface GalleryItem {
   description: string;
   link: string;
 }
-
 const galleryItems: GalleryItem[] = [
+  {
+    id: 9,
+    imageSrc: craxy,
+    title: "Craxy AI",
+    description: "AI Proposal Tracker",
+    link: "https://craxy.ai",
+  },
   {
     id: 8,
     imageSrc: iu,
@@ -105,7 +112,7 @@ const MyProjects: React.FC = () => {
             end: "bottom 20%",
             scrub: true,
           },
-        }
+        },
       );
     });
 
@@ -124,7 +131,7 @@ const MyProjects: React.FC = () => {
             ease: "power1.out",
             paused: true,
             duration: 0.5,
-          }
+          },
         );
 
         imageElement.addEventListener("mouseenter", () => {
@@ -143,7 +150,7 @@ const MyProjects: React.FC = () => {
       <a
         href="https://github.com/MasihMuhammadi?tab=repositories"
         target="_blank"
-        className="bg-yellow-500 p-2 rounded-md mt-16 px-10 mx-5 sm:mx-10 mb-10 text-black"
+        className="bg-[#147864] p-2 rounded-md mt-16 px-10 mx-5 sm:mx-10 mb-10 text-white"
       >
         See All Projects
       </a>
@@ -153,32 +160,32 @@ const MyProjects: React.FC = () => {
             <div
               key={item.id}
               ref={(el: any) => (galleryRefs.current[index] = el)}
-              className={`absolute transition-all duration-500 ease-in-out w-full h-auto shadow-md shadow-yellow-500 ${
+              className={`bg-black -z-10 opacity-90 absolute transition-all duration-500 ease-in-out hover:scale-105 w-full h-full shadow-md shadow-primary ${
                 activeProject === index ? "scale-110 z-20" : "scale-90 z-10"
               }`}
               style={{
+                // background: activeProject === index ? "red" : "blue",
                 top: activeProject === index ? "10px" : `${index * 60}px`,
                 left: activeProject === index ? "400px" : `${index * 20}px`,
                 zIndex: activeProject === index ? 20 : index,
-                width: activeProject === index ? "800px" : "300px",
+                width: activeProject === index ? "900px" : "400px",
+                height: activeProject === index ? "500px" : "200px",
               }}
               onClick={() =>
                 setActiveProject((prev) => (prev === index ? null : index))
               }
             >
-              <div className="relative group overflow-hidden rounded-lg shadow-lg">
-                <div className="relative">
-                  <Image
-                    src={item.imageSrc}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              <div className="relative group overflow-hidden rounded-lg  w-full h-full">
+                <Image
+                  src={item.imageSrc}
+                  alt={item.title}
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
               {activeProject === index && (
                 <a
                   href={item.link}
-                  className="absolute bottom-5 bg-yellow-500 text-white px-10 py-2 rounded-lg left-[45%]"
+                  className="absolute bottom-5 bg-primary text-white px-10 py-2 rounded-lg left-[45%]"
                   target="_blank"
                 >
                   Visit
@@ -193,25 +200,21 @@ const MyProjects: React.FC = () => {
           <div
             key={item.id}
             ref={(el: any) => (galleryRefs.current[index] = el)}
-            className="bg-black text-white border rounded-xl border-white shadow-sm shadow-yellow-500 p-3 mt-2 text-center flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
+            className="bg-black text-white border rounded-xl border-white shadow-sm shadow-primary p-3  mt-2 text-center flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
           >
             <Image
               src={item.imageSrc}
               className="w-auto h-auto rounded-md"
               alt={item.title}
             />
-            <p className="text-yellow-600 mt-3">{item.title}</p>
-            <a
-              className="bg-yellow-500 p-2 px-4 rounded text-black mt-4 hover:scale-95"
-              href={item.link}
-              target="_blank"
-            >
+            <p className="text-primary mt-3">{item.title}</p>
+            <Button href={item.link} type="primary">
               Visit
-            </a>
+            </Button>
           </div>
         ))}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

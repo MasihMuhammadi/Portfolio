@@ -24,7 +24,7 @@ const StaggerExample = () => {
   }, []);
 
   return (
-    <div className="text-3xl font-bold text-yellow-500 translate-y-5 ">
+    <div className="text-3xl font-bold text-primary translate-y-5 ">
       {name.split("").map((char, index) => (
         <span
           key={index}

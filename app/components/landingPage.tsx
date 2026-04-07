@@ -1,17 +1,23 @@
 "use client";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import myPhoto from "../../public/myImage.png";
-import { useEffect, useState } from "react";
-import Contra from "./contra";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
-import { FaArrowDown } from "react-icons/fa6";
-import StaggerExample from "./straggerExample";
-import gsap from "gsap";
-import LampPullCord from "./lampanimation";
+import { FaArrowDown, FaCalendarCheck, FaFileArrowDown } from "react-icons/fa6";
+// import myPhoto from "../../public/myImage.png";
+import samuraiPhoto from "../../public/samuraiPhoto.png";
+// import myNewPhoto from "@/public/laptop wave.png";
+import VariableProximity from "./VariableProximity";
+import Contra from "./contra";
+import { primaryColor } from "@/app/theme";
+import SamuraiSword from "./sword";
+import Button from "./button";
+
+/** Swap for your Calendly or other scheduling URL if you use one. */
+const BOOK_DEMO_URL = "/contact";
+const RESUME_FILE = "/resume.pdf";
 
 const LandingPage = () => {
-  const [toggleIt, setToggleIt] = useState(false);
+  // Typing effect for job titles
   const jobTitles = [
     "Front-end Web Developer",
     "Back-end Web Developer",
@@ -22,181 +28,172 @@ const LandingPage = () => {
   const [letterIndex, setLetterIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const textRef = useRef(null);
-  const nameRef = useRef(null);
-  const isInView = useInView(textRef, { once: false });
-  const isNameView = useInView(nameRef, { once: false });
-
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100;
 
     const handleTyping = () => {
       const currentText = jobTitles[jobIndex];
-
       if (!isDeleting && letterIndex < currentText.length) {
-        // Typing forward
         setDisplayedText((prev) => prev + currentText[letterIndex]);
         setLetterIndex((prev) => prev + 1);
       } else if (isDeleting && letterIndex > 0) {
-        // Deleting backward
         setDisplayedText((prev) => prev.slice(0, -1));
         setLetterIndex((prev) => prev - 1);
       } else if (!isDeleting && letterIndex === currentText.length) {
-        // Wait before starting to delete
         setTimeout(() => setIsDeleting(true), 1000);
       } else if (isDeleting && letterIndex === 0) {
-        // Move to next title
         setIsDeleting(false);
         setJobIndex((prev) => (prev + 1) % jobTitles.length);
       }
     };
 
-    const typingTimeout = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(typingTimeout);
-  }, [letterIndex, isDeleting, jobIndex]);
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.5,
-        staggerDirection: -1,
-      },
-    },
-  };
+    const timeout = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timeout);
+  }, [letterIndex, isDeleting, jobIndex, jobTitles]);
 
-  const item = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
-  };
+  // Refs for in-view animations
+  const peopleRef = useRef(null);
+  const samuraiRef = useRef(null);
+  const containerRef = useRef(null);
 
+  const isPeopleInView = useInView(peopleRef, { once: false });
+  const isSamuraiInView = useInView(samuraiRef, { once: false });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
   return (
     <>
-      <div className="flex flex-col-reverse sm:flex-row justify-between px-6 md:px-16 py-10 relative">
-        <div className="mt-24">
-          <h1 className="font-bold text-4xl">Hi, My Name is </h1>
-          <span className=" ">
-            <StaggerExample />
-          </span>
-          <p className="font-bold text-2xl mt-7">
-            a{" "}
-            <span className="allyellow inline-block text-xl">
-              {displayedText}
-              <span className="border-r-4 border-yellow-500 ml-1 animate-blink"></span>
-            </span>
-          </p>
-          <div className="flex gap-x-4">
-            <button className="mt-24 allYellow p-2 scale-100 rounded-lg hover:scale-95">
+      {/* Main top section */}
+
+      <div className="flex flex-col-reverse gap-x-4 gap-y-10  lg:flex-row justify-center items-start lg:items-center sm:justify-between px-4 md:px-8 py-10 relative">
+        {/* VariableProximity Name */}
+        <div
+          style={{
+            position: "relative",
+            fontSize: "31px",
+            color: "var(--primary)",
+          }}
+          className="w-full sm:max-w-[60 lg:max-w-[40%] xl:max-w-[30%] "
+          ref={containerRef}
+        >
+          <VariableProximity
+            label={"My Name is masihullah  "}
+            containerRef={containerRef}
+            className={"variable-proximity-demo"}
+            fromFontVariationSettings="'wght' 400, 'opsz' 9"
+            toFontVariationSettings="'wght' 1000, 'opsz' 40"
+            // containerRef={containerRef}
+            radius={100}
+            falloff="linear"
+            // falloff="linear"
+          />{" "}
+          <VariableProximity
+            label={"Full-Stack Web developer  "}
+            containerRef={containerRef}
+            className={"variable-proximity-demo"}
+            fromFontVariationSettings="'wght' 400, 'opsz' 9"
+            toFontVariationSettings="'wght' 1000, 'opsz' 40"
+            // containerRef={containerRef}
+            radius={100}
+            falloff="linear"
+            // falloff="linear"
+          />
+          <div className="flex gap-3 mt-6 ">
+            <Button className="rounded-lg" type="primary">
+              <FaCalendarCheck size={18} className="shrink-0 text-white" />
+              <span>Book a demo</span>
+            </Button>
+            <Button type="primary" className="rounded-lg">
               <a
-                href={"/myCv.pdf"}
-                download
-                className="mt-24 allYellow text-black p-2 rounded-lg active:scale-95"
+                href="/Masihullah Muhammadi.pdf" // path to your CV file in public folder
+                download="Masihullah Muhammadi.pdf"
+                className="flex items-center gap-2"
               >
-                Download CV
+                <FaFileArrowDown size={18} className="shrink-0 text-white" />
+                <span>Download CV</span>
               </a>
-            </button>
-            <motion.button
-              className="flex flex-col relative z-[100000]"
-              whileTap={{ scale: 0.95 }}
-              whileDrag={{ scale: 0.9, rotate: 10 }}
-              drag
-            >
-              <a
-                draggable="false"
-                className="mt-24 mx-2 blackBtns p-2 rounded-lg active:scale-95 w-auto h-auto"
-                href="https://calendly.com/masihcode"
-                target="_blank"
-              >
-                Book a Call
-              </a>
-              {/* <motion.div
-                className="w-auto h-auto z-[-1000]"
-                animate={{
-                  scale: [1, 1.06, 1],
-                  translateX: [1, 1.7, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                }}
-              >
-                <div className="absolute -bottom-32 -left-10  rotate-90">
-                  <svg
-                    width="200"
-                    height="100"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10,50 C50,10, 100,90, 150,50 C200,10, 250,90, 300"
-                      stroke="currentColor"
-                      fill="transparent"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </div>
-              </motion.div> */}
-            </motion.button>
+            </Button>
           </div>
         </div>
 
-        <div className="relative ">
-          <div className="hidden sm:block">
-            {Array.from({ length: 8 }, (_, index) => (
-              <div
-                key={index}
-                className="w-1 h-[400px] right-40  rotate-45 -z-[1000] bg-yellow-500 absolute"
-                style={{ top: `calc(70px - ${index * 4}%)` }}
-              ></div>
-            ))}
-          </div>
+        <div
+          className="spotlight-container h-[200px] hidden lg:block"
+          onMouseMove={handleMouseMove}
+          style={
+            {
+              "--x": `${mousePos.x}px`,
+              "--y": `${mousePos.y}px`,
+            } as React.CSSProperties
+          }
+        >
+          <p className="spotlight-text text-3xl text-center flex flex-col items-center ">
+            {`I build modern web applications
+focused on clean UI, performance, and real-world usability.`
+              .split("\n")
+              .map((line, lineIndex) => (
+                <span key={lineIndex}>
+                  {line.split(" ").map((word, i) => (
+                    <span key={i} className="word">
+                      {word}{" "}
+                    </span>
+                  ))}
+                  <br />
+                </span>
+              ))}
+          </p>
+        </div>
 
+        <div className="relative z-10">
           <Image
             draggable={false}
-            className="select-none -mt-16"
-            src={myPhoto}
+            className="select-none rounded-lg  shadow-primary -mt-16 items-center content-center text-center"
+            src={samuraiPhoto}
             alt="my photo"
-            width={600}
-            height={400}
+            width={550}
+            height={550}
           />
         </div>
       </div>
 
-      <div className="flex justify-center items-center ">
+      {/* Down arrow */}
+      <div className="flex justify-center items-start">
         <motion.div
           className="w-auto h-auto"
-          animate={{
-            translateY: [1, 10, 1],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "loop",
-          }}
+          animate={{ translateY: [1, 10, 1] }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "loop" }}
         >
           <FaArrowDown className="opacity-30 font-extralight text-[12px]" />
         </motion.div>
       </div>
 
+      {/* People Call Me */}
       <motion.div
-        className="flex flex-col items-center justify-between"
-        initial={{ opacity: 0, y: 50 }} // Starts invisible and below the viewport
-        animate={isInView ? { opacity: 1, y: 0 } : {}} // Triggers animation when in view
-        transition={{ duration: 1 }} // Smooth transition
+        ref={peopleRef}
+        className="flex flex-col items-center justify-center mt-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isPeopleInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1 }}
       >
-        <h1 className=" select-none text-[90px] text-transparent font-[650] text-center outline-text">
+        <h1 className="select-none text-center text-[90px] text-stroke-[1px] text-stroke-primary/60 text-stroke-fill-transparent">
           People call me
         </h1>
       </motion.div>
 
-      <div ref={textRef}></div>
+      {/* Samurai Coder + Hire Button */}
       <motion.div
-        className="flex flex-col items-center justify-between"
-        initial={{ opacity: 0, y: 50 }} // Starts invisible and below the viewport
-        animate={isNameView ? { opacity: 1, y: 0 } : {}} // Triggers animation when in view
-        transition={{ duration: 1 }} // Smooth transition
+        ref={samuraiRef}
+        className="flex flex-col items-center justify-center mt-6"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isSamuraiInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1, delay: 0.3 }}
       >
-        <h1 className="select-none text-[70px] text-transparent font-[650] text-center outline-text">
+        <h1 className="select-none text-[70px] text-stroke-[1px] text-stroke-primary/60 text-stroke-fill-transparent font-[650] text-center ">
           Samurai Coder
         </h1>
 
@@ -209,7 +206,6 @@ const LandingPage = () => {
           <Contra />
           Hire Samurai
         </motion.a>
-        <div ref={nameRef}></div>
       </motion.div>
     </>
   );

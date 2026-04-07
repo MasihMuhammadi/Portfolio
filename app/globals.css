@@ -5,10 +5,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #171717;
-  --secondary: #eab308;
+  /* Brand primary — single source with app/theme.ts (rgb 20, 120, 100) */
+  --primary-rgb: 20 120 100;
+  --primary: rgb(var(--primary-rgb));
+  --secondary: var(--primary);
   --thirnary: #000;
-  --shadow: #eab308;
+  --shadow: var(--primary);
   --blackAndWhiteBtn: #000;
   --borders: #000;
 }
@@ -17,29 +19,26 @@
   :root {
     --background: #0f0f0f;
     --foreground: #ededed;
-    /* --secondary: #f59e0b; */
   }
 }
-.allYellow {
-  background-color: var(--secondary);
-  color: black;
-}
-.borders {
-  border-bottom: 2px solid var(--secondary);
-  color: var(--background);
-}
-.allWhite {
-  color: var(--primary);
-}
-.allBlack {
-  background-color: var(--thirnary);
-}
-.shadows {
-  box-shadow: 0px 5px 10px 0 var(--shadow);
-}
-.blackBtns {
-  color: var(--background);
-  background-color: var(--blackAndWhiteBtn);
+html {
+  /* cursor: url("/icons8-katana-sword-30.png"), auto; */
+  /* position: relative; */
+  color: white;
+  background: rgba(20, 120, 100, 0, 28);
+  /* This is the MAGIC */
+  -webkit-mask-image: radial-gradient(
+    300px circle at var(--x) var(--y),
+    rgb(20, 120, 100) 100%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    300px circle at var(--x) var(--y),
+    rgb(20, 120, 100) 100%,
+    transparent 190%
+  );
+
+  transition: mask-position 0.1s ease;
 }
 .borders {
   border-bottom: var(--background);
@@ -87,8 +86,11 @@ body {
   justify-content: center;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075),
-    0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075),
+  box-shadow:
+    0 0 1px hsl(0deg 0% 0% / 0.075),
+    0 0 2px hsl(0deg 0% 0% / 0.075),
+    0 0 4px hsl(0deg 0% 0% / 0.075),
+    0 0 8px hsl(0deg 0% 0% / 0.075),
     0 0 16px hsl(0deg 0% 0% / 0.075);
   transform-origin: 10% 60%;
 }
@@ -137,12 +139,119 @@ body {
   -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
 }
 
-.puzzle-piece {
-  background-repeat: no-repeat;
-  border: 1px solid #ddd; /* Optional: Add borders for each puzzle piece */
-  transition: transform 0.2s ease-in-out;
+#buttons:hover,
+.cursor-pointer:hover,
+button:hover,
+a:hover {
+  cursor: url("/icons8-katana-sword-30.png"), auto;
 }
 
-.puzzle-piece:hover {
-  transform: scale(1.1); /* Optional: Add hover effect */
+.skill-card-missile {
+  position: relative;
+  padding: 24px 126px;
+  width: 160px;
+
+  background: rgba(20, 20, 25, 0.65);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* 🚀 MISSILE SHAPE */
+  clip-path: polygon(
+    50% 0%,
+    /* top point */ 85% 12%,
+    /* top right slope */ 85% 88%,
+    /* bottom right straight */ 50% 100%,
+    /* bottom point */ 15% 88%,
+    /* bottom left straight */ 15% 12% /* top left slope */
+  );
+
+  transition: all 0.3s ease;
+}
+.snake-border {
+  position: relative;
+  overflow: hidden;
+}
+.snake-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1000;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 300deg,
+    #14b8a6 320deg,
+    #00f5d4 340deg,
+    transparent 360deg
+  );
+
+  animation: rotateSnake 2.5s linear infinite;
+}
+.snake-border::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background: rgba(20, 20, 25, 0.9); /* same as card */
+  backdrop-filter: blur(14px);
+
+  /* SAME SHAPE */
+  clip-path: polygon(50% 0%, 85% 12%, 85% 88%, 50% 100%, 15% 88%, 15% 12%);
+}
+@keyframes rotateSnake {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--w);
+  }
+}
+
+.animate-grow {
+  animation: grow 1s ease-out forwards;
+}
+/* Add this to your globals.css or Tailwind CSS via @layer */
+
+.animate-attack {
+  animation: attack 5s cubic-bezier(0, 1.38, 0.83, 0.67) infinite;
+  transform-origin: 50% 77%;
+  transition: transform 1s;
+}
+.spotlight-container {
+  position: relative;
+  cursor: none;
+}
+
+/* Base dark text */
+.word {
+  color: rgba(255, 255, 255, 0.24);
+}
+
+/* Top glowing text layer */
+.spotlight-text {
+  position: relative;
+  color: white;
+  background: rgba(20, 120, 100, 0, 28);
+  /* This is the MAGIC */
+  -webkit-mask-image: radial-gradient(
+    80px circle at var(--x) var(--y),
+    white 0%,
+    transparent 70%
+  );
+  mask-image: radial-gradient(
+    80px circle at var(--x) var(--y),
+    white 0%,
+    transparent 90%
+  );
+
+  transition: mask-position 0.1s ease;
 }

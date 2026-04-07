@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Footer from "../components/footer";
+import SkillCardsDesktop from "./skillShared";
+// import MagicBento from "./MagicBento";
 
 const MySkills = () => {
   const [showAnimation, setShowAnimation] = useState(false);
@@ -73,13 +75,16 @@ const MySkills = () => {
   useEffect(() => {
     const timers = animatedSkills.map(
       (skill, index) =>
-        setTimeout(() => {
-          setAnimatedSkills((prevSkills) =>
-            prevSkills.map((s, i) =>
-              i === index ? { ...s, initialHeight: s.targetHeight } : s
-            )
-          );
-        }, 400 + index * 200) // Staggered delay
+        setTimeout(
+          () => {
+            setAnimatedSkills((prevSkills) =>
+              prevSkills.map((s, i) =>
+                i === index ? { ...s, initialHeight: s.targetHeight } : s,
+              ),
+            );
+          },
+          400 + index * 200,
+        ), // Staggered delay
     );
 
     return () => timers.forEach((timer) => clearTimeout(timer)); // Cleanup timers
@@ -88,118 +93,11 @@ const MySkills = () => {
   return (
     <>
       <div className=" p-4 md:pr-20 overflow-x-hidden overflow-y-auto hidden-scroll">
-        {/* Large screen view */}
-        <div className="hidden lg:flex justify-between rotate-90 md:rotate-0 mt-[400px] lg:mt-0 mb-10 ">
-          <div className="px-20 relative">
-            <div className="h-[400px] w-1 allBlack"></div>
-            <div className="w-[900px] h-1 allBlack"></div>
-            <div>
-              {[100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40].map(
-                (level, index) => (
-                  <div
-                    key={index}
-                    className={`levels absolute text-[10px] w-[${level}%]`}
-                    style={{ top: `${5 + index * 25}px`, left: "50px" }}
-                  >
-                    {level}%
-                  </div>
-                )
-              )}
-            </div>
-            {animatedSkills.map((skill, index) => (
-              <div key={index} className="absolute">
-                <div
-                  className="absolute -z-[1000] w-5 transition-all duration-300 rounded allYellow"
-                  style={{
-                    height: skill.initialHeight,
-                    left: skill.position.left,
-                    top: skill.position.top,
-                  }}
-                ></div>
-                <span
-                  className="text-[12px] absolute w-[120px]"
-                  style={{
-                    left: `calc(${skill.position.left} - 20px)`,
-                    top: `calc(${skill.position.top} + ${skill.targetHeight} + 5px)`,
-                  }}
-                >
-                  {skill.title}
-                </span>
-              </div>
-            ))}
-          </div>
-          <div>
-            <div className="flex flex-col mt-20 mr-20 p-10 shadow-sm shadows ">
-              <div className="relative p-6 w-64 bg-white text-black my-2 rounded">
-                <div
-                  className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500 ${
-                    showAnimation ? "w-[85%] " : "w-0 "
-                  }`}
-                >
-                  Frontend
-                </div>
-              </div>
-              <div className="relative   p-6 w-64 bg-white text-black rounded">
-                <div
-                  className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500  ${
-                    showAnimation ? "w-[70%]" : "w-0"
-                  }`}
-                >
-                  Backend
-                </div>
-              </div>
-              <div className="relative mt-2  p-6 w-64 bg-white text-black rounded">
-                <div
-                  className={`absolute top-0 left-0 h-12 transition-all p-3 rounded-sm duration-300 bg-yellow-500  ${
-                    showAnimation ? "w-[60%]" : "w-0"
-                  }`}
-                >
-                  UI/UX
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Large screen (modern cards) */}
 
-        {/* Medium screen view */}
-        <div className="hidden md:flex lg:hidden flex-wrap gap-4 my-20">
-          {animatedSkills.map((skill, index) => (
-            <div key={index} className="flex items-center w-full">
-              <span className="w-24 text-sm">{skill.title}</span>
-              <div className="w-full bg-gray-300 rounded h-2 mx-2 relative">
-                <div
-                  className="bg-yellow-500 h-2 rounded transition-all duration-300"
-                  style={{
-                    width:
-                      showAnimation && skill.level ? `${skill.level}%` : "0%",
-                  }}
-                ></div>
-                <span className="absolute right-0 top-[-18px] text-xs ">
-                  {skill.level}%
-                </span>
-              </div>
-            </div>
-          ))}
+        <div className="">
+          <SkillCardsDesktop />
         </div>
-
-        {/* Small screen view */}
-        <div className="flex md:hidden flex-col gap-4 mt-10">
-          {animatedSkills.map((skill, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between px-4 py-2 bg-yellow-500 text-black rounded-md shadow-md transition-all duration-700 transform"
-              style={{
-                width: showAnimation && skill.level ? `${skill.level}%` : "0%",
-              }}
-            >
-              <span className="text-sm font-semibold">{skill.title}</span>
-              <span className="text-sm">{skill.level}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className=" overflow-x-hidden ">
-        <Footer />
       </div>
     </>
   );

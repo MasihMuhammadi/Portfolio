@@ -5,10 +5,13 @@ import { usePathname } from "next/navigation";
 import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import Logo from "@/public/logo";
 import useMenuListAnimation from "./hooks/useNavbarAnimation";
+import PillNav from "./PillaNav";
+import newLogo from "@/public/Group 32.svg";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
   const currentPath = usePathname(); // Automatically updates on route change
 
   const menuRef = useRef<HTMLDivElement>(null); // Reference for scope
@@ -17,9 +20,9 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isOpen) {
-      useMenuListAnimation(menuRef, 0.5); // Set a delay before showing the links (0.5 seconds delay)
+      useMenuListAnimation(menuRef, 0.5);
     }
-  }, [isOpen]); // Only trigger animation when the menu state changes to open
+  }, [isOpen]);
 
   return (
     <div className="flex justify-between items-center p-6 ">
@@ -27,69 +30,51 @@ const Navbar = () => {
       <div className="text-xl font-semibold">
         <Link href="/">
           <Logo />
+          {/* <Image
+            src={newLogo}
+            width={50}
+            height={50}
+            alt="My Photo"
+            className="rounded-full text-blue-500"
+          /> */}
         </Link>
       </div>
 
       {/* Desktop Menu */}
-      <nav className="hidden md:flex mt-5">
-        <ul className="flex gap-x-8 text-[15px]">
-          <li
-            className={`hover:border-b hover:border-b-slate-50 transition-all hover:shadow-2xl hover:shadow-white duration-100 ${
-              currentPath === "/" ? "text-yellow-500 border-b-yellow-500" : ""
-            }`}
-          >
-            <Link href="/">About Me</Link>
-          </li>
-          <li
-            className={`hover:border-b hover:border-b-slate-50 transition-all hover:shadow-2xl hover:shadow-white duration-100 ${
-              currentPath === "/skills"
-                ? "text-yellow-500 border-b-yellow-500"
-                : ""
-            }`}
-          >
-            <Link href="/skills">My Skills</Link>
-          </li>
-          <li
-            className={`hover:border-b hover:border-b-slate-50 transition-all hover:shadow-2xl hover:shadow-white duration-100 ${
-              currentPath === "/experiences"
-                ? "text-yellow-500 border-b-yellow-500"
-                : ""
-            }`}
-          >
-            <Link href="/experiences">My Experience</Link>
-          </li>
-          <li
-            className={`hover:border-b hover:border-b-slate-50 transition-all hover:shadow-2xl hover:shadow-white duration-100 ${
-              currentPath === "/projects"
-                ? "text-yellow-500 border-b-yellow-500"
-                : ""
-            }`}
-          >
-            <Link href="/projects">My Project</Link>
-          </li>
-          <li
-            className={`list-none text-black bg-white rounded-md ${
-              currentPath === "/contact"
-                ? "text-yellow-500 border-b-yellow-500"
-                : ""
-            }`}
-          >
-            <Link href="/contact" className="px-3  blackBtns py-3 rounded-md">
-              Get In Touch
-            </Link>
-          </li>
-        </ul>
+      {/* <nav className="hidden بمخشقف-مثبف mt-5"> */}
+      <nav className="hidden md:flex items-center justify-end mt-5">
+        <PillNav
+          logo=""
+          logoAlt="Company Logo"
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Experiences", href: "/experiences" },
+            { label: "Skills", href: "/skills" },
+            { label: "Projects", href: "/projects" },
+            { label: "Contact", href: "/contact" },
+          ]}
+          activeHref="/"
+          className="custom-nav"
+          ease="power2.easeOut"
+          baseColor="#000000"
+          pillColor="rgb(20,120,100)"
+          hoveredPillTextColor="#ffffff"
+          pillTextColor="#000000"
+          // theme=""
+          initialLoadAnimation={false}
+        />
       </nav>
+      {/* </nav> */}
 
       {/* Burger Icon for Mobile Menu */}
-      <div className="md:hidden z-[1000000] allWhite">
+      <div className="md:hidden z-[1000000] ">
         <button onClick={toggleMenu} aria-label="Toggle Menu">
           {isOpen ? (
             <FaTimes size={24} color="white" />
           ) : (
             <>
-              <div className="allBlack w-6 h-1 rounded"></div>
-              <div className="allBlack w-4 h-1 rounded mt-1"></div>
+              <div className="bg-primary w-6 h-1 rounded"></div>
+              <div className="bg-primary w-4 h-1 rounded mt-1"></div>
             </>
           )}
         </button>
@@ -117,7 +102,7 @@ const Navbar = () => {
             onClick={toggleMenu}
             id="menu-list-item"
             className={
-              currentPath === "/" ? "text-yellow-500 border-b-yellow-500" : ""
+              currentPath === "/" ? "text-primary border-b-yellow-500" : ""
             }
           >
             About Me
@@ -128,7 +113,7 @@ const Navbar = () => {
             id="menu-list-item"
             className={
               currentPath === "/skills"
-                ? "text-yellow-500 border-b-yellow-500"
+                ? "text-primary border-b-primary-500"
                 : ""
             }
           >
@@ -140,7 +125,7 @@ const Navbar = () => {
             id="menu-list-item"
             className={
               currentPath === "/experiences"
-                ? "text-yellow-500 border-b-yellow-500"
+                ? "text-primary border-b-primary-500"
                 : ""
             }
           >
@@ -152,7 +137,7 @@ const Navbar = () => {
             id="menu-list-item"
             className={
               currentPath === "/projects"
-                ? "text-yellow-500 border-b-yellow-500"
+                ? "text-primary border-b-primary-500"
                 : ""
             }
           >
@@ -162,8 +147,8 @@ const Navbar = () => {
             href="/contact"
             onClick={toggleMenu}
             id="menu-list-item"
-            className={`bg-yellow-500 p-3 rounded-md text-black ${
-              currentPath === "/contact" ? " border-b-yellow-500" : ""
+            className={`bg-primary p-3 rounded-md text-black ${
+              currentPath === "/contact" ? " border-b-primary" : ""
             }`}
           >
             Get In Touch
