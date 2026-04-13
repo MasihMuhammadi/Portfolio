@@ -104,19 +104,19 @@ const LandingPage = () => {
             falloff="linear"
             // falloff="linear"
           />
-          <div className="flex gap-3 mt-6 ">
+          <div className="flex gap-1.5 sm:gap-2.5 mt-6 ">
             <Button className="rounded-lg" type="primary">
-              <FaCalendarCheck size={18} className="shrink-0 text-white" />
-              <span>Book a demo</span>
+              <FaCalendarCheck size={14} className="shrink-0 text-white" />
+              <span className="text-xs sm:text-base">Book a demo</span>
             </Button>
             <Button type="primary" className="rounded-lg">
               <a
                 href="/Masihullah Muhammadi.pdf" // path to your CV file in public folder
                 download="Masihullah Muhammadi.pdf"
-                className="flex items-center gap-2"
+                className="flex items-center gap-1.5 sm:gap-2.5"
               >
                 <FaFileArrowDown size={18} className="shrink-0 text-white" />
-                <span>Download CV</span>
+                <span className="text-xs sm:text-base">Download CV</span>
               </a>
             </Button>
           </div>
@@ -197,7 +197,7 @@ focused on clean UI, performance, and real-world usability.`
           Samurai Coder
         </h1>
 
-        <motion.a
+        {/* <motion.a
           href="http://contra.com/samuraicoder"
           target="_blank"
           className="mt-4 p-2 rounded-lg active:scale-95 flex flex-row blackBtns items-center gap-x-2 h-8 w-40"
@@ -205,7 +205,7 @@ focused on clean UI, performance, and real-world usability.`
         >
           <Contra />
           Hire Samurai
-        </motion.a>
+        </motion.a> */}
       </motion.div>
     </>
   );

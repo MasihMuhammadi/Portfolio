@@ -13,7 +13,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="sm:px-3  h-14 bottom-0 w-[100%] bg-[#0f0f0f] my-3">
+    <div className="sm:px-3 px-7 h-14 bottom-0 w-[100%] bg-[#0f0f0f] my-3">
       <div className="border-t-[0.1px] border-t-white w-full   flex sm:flex-row-reverse flex-col items-center pt-5 justify-around gap-x-20 gap-y-5 overflow-x-hidden">
         {/* <div>
           <LampPullCord />
@@ -25,16 +25,16 @@ const Footer = () => {
           <Link href="/experiences">Experience</Link>
           <Link href="/contact">Contact</Link>
         </div> */}
-        <div className="flex  gap-x-7">
+        <div className="flex gap-1 sm:gap-x-7">
           <div className="flex gap-x-2 text-[12px] min-w-[200px]">
             {" "}
             <b>&copy;</b>
-            <p>
+            <p className="text-xs sm:text-xs">
               All Right Reserved. Masihullah Muhammadi{" "}
               {new Date().getFullYear()}{" "}
             </p>
           </div>
-          <div className="flex gap-x-6">
+          <div className="flex gap-x-3 sm:gap-x-4">
             <a href="https://github.com/MasihMuhammadi" target="_blank">
               <FaGithub />
             </a>
