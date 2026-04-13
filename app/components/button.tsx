@@ -13,14 +13,14 @@ const Button = ({
   type: "submit" | "primary" | "secondary";
 }) => {
   const baseClasses =
-    "relative overflow-hidden px-6 py-2 rounded-full border border-white/20 bg-transparent cursor-pointer transition-transform duration-200 active:scale-95 group  gap-x-2 border-1 border-[rgb(20,120,100)]";
+    "relative overflow-hidden px-4 py-2 rounded-full border border-white/20 bg-transparent cursor-pointer transition-transform duration-200 active:scale-95 group gap-x-2 border-1 border-[rgb(20,120,100)] w-full text-center flex items-center justify-center ";
 
   const content = (
     <>
       {/* Background */}
       <span
         className="
-          absolute inset-0 
+          absolute inset-0 w-full
           bg-[rgb(20,120,100)]
           pointer-events-none
           transform -translate-x-full -translate-y-full
@@ -29,8 +29,8 @@ const Button = ({
         "
       />
 
-      {/* Text */}
-      <span className="relative z-10 text-white text-sm transition-colors duration-200 flex flex-row gap-x-2">
+      {/* Text - Fixed: added whitespace-nowrap to prevent text wrapping */}
+      <span className="relative z-10 text-white text-sm transition-colors duration-200 flex flex-row gap-x-2 w-full whitespace-nowrap items-center justify-center text-center">
         {children}
       </span>
     </>
@@ -42,7 +42,7 @@ const Button = ({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${baseClasses} ${className}`}
+        className={`text-center ${baseClasses} ${className}`}
       >
         {content}
       </a>
@@ -51,7 +51,7 @@ const Button = ({
 
   return (
     <button
-      className={`${baseClasses} ${className}`}
+      className={` text-center ${baseClasses} ${className}`}
       type={type === "submit" ? "submit" : "button"}
     >
       {content}

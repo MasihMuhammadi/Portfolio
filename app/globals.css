@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..1000&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -143,7 +144,7 @@ body {
 .cursor-pointer:hover,
 button:hover,
 a:hover {
-  cursor: url("/icons8-katana-sword-30.png"), auto;
+cursor: url("/icons8-katana-sword-30.png") 20 2, auto;
 }
 
 .skill-card-missile {

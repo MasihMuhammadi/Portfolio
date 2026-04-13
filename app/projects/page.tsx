@@ -16,6 +16,57 @@ import craxy from "../../public/craxy.png";
 import Button from "../components/button";
 gsap.registerPlugin(ScrollTrigger);
 
+// Skeleton Component
+const ImageSkeleton = ({ className = "" }: { className?: string }) => (
+  <div className={`animate-pulse bg-gray-200 rounded-lg ${className}`}>
+    <div className="w-full h-full bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded-lg" />
+  </div>
+);
+
+// Image Component with Skeleton
+const LazyImage = ({
+  src,
+  alt,
+  className = "",
+  fill = false,
+  width,
+  height,
+}: {
+  src: any;
+  alt: string;
+  className?: string;
+  fill?: boolean;
+  width?: number;
+  height?: number;
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <div className="relative w-full h-full">
+      {/* Skeleton Loader */}
+      {isLoading && (
+        <div className="absolute inset-0">
+          <ImageSkeleton className="w-full h-full" />
+        </div>
+      )}
+
+      {/* Actual Image */}
+      <Image
+        src={src}
+        alt={alt}
+        fill={fill}
+        width={!fill ? width : undefined}
+        height={!fill ? height : undefined}
+        className={`${className} transition-opacity duration-500 ${
+          isLoading ? "opacity-0" : "opacity-100"
+        }`}
+        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
+      />
+    </div>
+  );
+};
+
 interface GalleryItem {
   id: number;
   imageSrc: any;
@@ -23,6 +74,7 @@ interface GalleryItem {
   description: string;
   link: string;
 }
+
 const galleryItems: GalleryItem[] = [
   {
     id: 9,
@@ -93,6 +145,7 @@ const galleryItems: GalleryItem[] = [
 const MyProjects: React.FC = () => {
   const [activeProject, setActiveProject] = useState<number | null>(0);
   const galleryRefs: any = useRef<any>([]);
+  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
     galleryRefs.current.forEach((el: any, index: number) => {
@@ -150,10 +203,13 @@ const MyProjects: React.FC = () => {
       <a
         href="https://github.com/MasihMuhammadi?tab=repositories"
         target="_blank"
-        className="bg-[#147864] p-2 rounded-md mt-16 px-10 mx-5 sm:mx-10 mb-10 text-white"
+        className="bg-[#147864] p-2 rounded-md mt-16 px-10 mx-5 sm:mx-10 mb-10 text-white inline-block"
+        rel="noopener noreferrer"
       >
         See All Projects
       </a>
+      
+      {/* Desktop View */}
       <div className="min-h-screen hidden lg:flex items-start mt-7 justify-start px-4 sm:px-8 md:px-16">
         <div className="relative p-8 flex flex-wrap justify-center gap-8">
           {galleryItems.map((item, index) => (
@@ -164,7 +220,6 @@ const MyProjects: React.FC = () => {
                 activeProject === index ? "scale-110 z-20" : "scale-90 z-10"
               }`}
               style={{
-                // background: activeProject === index ? "red" : "blue",
                 top: activeProject === index ? "10px" : `${index * 60}px`,
                 left: activeProject === index ? "400px" : `${index * 20}px`,
                 zIndex: activeProject === index ? 20 : index,
@@ -175,18 +230,20 @@ const MyProjects: React.FC = () => {
                 setActiveProject((prev) => (prev === index ? null : index))
               }
             >
-              <div className="relative group overflow-hidden rounded-lg  w-full h-full">
-                <Image
+              <div className="relative group overflow-hidden rounded-lg w-full h-full">
+                <LazyImage
                   src={item.imageSrc}
                   alt={item.title}
+                  fill={true}
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
               {activeProject === index && (
                 <a
                   href={item.link}
-                  className="absolute bottom-5 bg-primary text-white px-10 py-2 rounded-lg left-[45%]"
+                  className="absolute bottom-5 bg-[#147864] text-white px-10 py-2 rounded-lg left-[45%] hover:bg-[#0f5a4a] transition-colors"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Visit
                 </a>
@@ -195,26 +252,31 @@ const MyProjects: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="md:grid-cols-2 lg:hidden gap-10 px-4 sm:px-10 mt-5 my-16">
+
+      {/* Mobile/Tablet View */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:hidden gap-10 px-4 sm:px-10 mt-5 my-16">
         {galleryItems.map((item: any, index) => (
           <div
             key={item.id}
             ref={(el: any) => (galleryRefs.current[index] = el)}
-            className="bg-black text-white border rounded-xl border-white shadow-sm shadow-primary p-3  mt-2 text-center flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
+            className="bg-black text-white border rounded-xl border-white shadow-sm shadow-primary p-3 mt-2 text-center flex flex-col items-center justify-center hover:scale-105 transition-transform duration-200"
           >
-            <Image
-              src={item.imageSrc}
-              className="w-auto h-auto rounded-md"
-              alt={item.title}
-            />
-            <p className="text-primary mt-3">{item.title}</p>
+            <div className="relative w-full h-48 mb-3">
+              <LazyImage
+                src={item.imageSrc}
+                alt={item.title}
+                fill={true}
+                className="rounded-md"
+              />
+            </div>
+            <p className="text-[#147864] mt-3 font-semibold">{item.title}</p>
+            <p className="text-gray-400 text-sm mb-3">{item.description}</p>
             <Button href={item.link} type="primary">
               Visit
             </Button>
           </div>
         ))}
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };
