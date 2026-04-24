@@ -23,7 +23,7 @@ export type SkillCategory =
   | "cloud"
   | "others";
 
-type BadgeKind = "expert" | "advanced";
+type BadgeKind = "expert" | "advanced" | "good";
 
 export type DesktopSkill = {
   id: string;
@@ -46,6 +46,7 @@ const FILTERS: { id: SkillCategory; label: string }[] = [
 function badgeForLevel(level: number): BadgeKind | undefined {
   if (level >= 92) return "expert";
   if (level >= 78) return "advanced";
+  if (level >= 50) return "good";
   return undefined;
 }
 
@@ -113,6 +114,7 @@ const DESKTOP_SKILLS: DesktopSkill[] = [
     id: "data",
     name: "MongoDB & MySQL",
     level: 70,
+    badge: badgeForLevel(70),
     category: "backend",
     icon: (
       <div className="flex items-center justify-center gap-1.5">
@@ -233,7 +235,11 @@ function SkillShieldCard({ skill }: { skill: DesktopSkill }) {
     >
       {skill.badge && (
         <span className="absolute right-2  top-4 z-10 rounded-md border border-white/15 bg-zinc-600/80 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur-sm">
-          {skill.badge === "expert" ? "Expert" : "Advanced"}
+          {skill.badge === "expert"
+            ? "Expert"
+            : skill.badge === "advanced"
+              ? "Advanced"
+              : "Good"}
         </span>
       )}
 

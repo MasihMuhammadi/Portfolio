@@ -138,7 +138,7 @@ body {
 /* Fallback for older browsers (Internet Explorer, Edge) */
 .hidden-scroll {
   -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
-}
+}           
 
 #buttons:hover,
 .cursor-pointer:hover,

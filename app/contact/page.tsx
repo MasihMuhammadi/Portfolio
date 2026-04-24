@@ -71,7 +71,7 @@ const Contact = () => {
   return (
     <div className="w-[100%] my-1 overflow-x-hidden">
       {/* <h1>Contact me</h1> */}
-      <div className="flex flex-col-reverse gap-16 lg:flex-row items-center  justify-center md:gap-x-10 lg:gap-x-64 ">
+      <div className="flex flex-col-reverse gap-16 lg:flex-row items-center  justify-center md:gap-x-10 lg:gap-x-64 py-10  z-[1000] ">
         <div className="flex flex-col gap-10  ">
           {/* <ContactInfo
             icon={<MdLocationPin size={30} />}
@@ -116,9 +116,10 @@ const Contact = () => {
           speed={1}
           chaos={0.12}
           thickness={2}
-          style={{ borderRadius: 16 }}
+          style={{ borderRadius: 16, shadow: `none`, boxShadow: "none" }}
+          className="shadow-none"
         >
-          <div className="bg-transparent shadow-lg   shadows  p-4 md:p-20 rounded-lg mx-4 sm:mx-2">
+          <div className="bg-transparent p-4 md:p-20 rounded-lg mx-4 sm:mx-2">
             <h2 className="font-normal text-2xl mb-5 text-center">
               Send Me An Email
             </h2>

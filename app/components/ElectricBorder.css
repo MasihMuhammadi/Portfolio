@@ -53,7 +53,7 @@
   filter: blur(4px);
 }
 
-.eb-background-glow {
+/* .eb-background-glow {
   z-index: -1;
   transform: scale(1.1);
   filter: blur(32px);
@@ -64,4 +64,4 @@
     transparent,
     var(--electric-border-color)
   );
-}
+} */

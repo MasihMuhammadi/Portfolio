@@ -93,8 +93,6 @@ const MySkills = () => {
   return (
     <>
       <div className=" p-4 md:pr-20 overflow-x-hidden overflow-y-auto hidden-scroll">
-        {/* Large screen (modern cards) */}
-
         <div className="">
           <SkillCardsDesktop />
         </div>

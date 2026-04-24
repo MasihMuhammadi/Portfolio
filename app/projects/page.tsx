@@ -145,7 +145,9 @@ const galleryItems: GalleryItem[] = [
 const MyProjects: React.FC = () => {
   const [activeProject, setActiveProject] = useState<number | null>(0);
   const galleryRefs: any = useRef<any>([]);
-  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>({});
+  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>(
+    {},
+  );
 
   useEffect(() => {
     galleryRefs.current.forEach((el: any, index: number) => {
@@ -208,7 +210,7 @@ const MyProjects: React.FC = () => {
       >
         See All Projects
       </a>
-      
+
       {/* Desktop View */}
       <div className="min-h-screen hidden lg:flex items-start mt-7 justify-start px-4 sm:px-8 md:px-16">
         <div className="relative p-8 flex flex-wrap justify-center gap-8">
@@ -216,7 +218,7 @@ const MyProjects: React.FC = () => {
             <div
               key={item.id}
               ref={(el: any) => (galleryRefs.current[index] = el)}
-              className={`bg-black -z-10 opacity-90 absolute transition-all duration-500 ease-in-out hover:scale-105 w-full h-full shadow-md shadow-primary ${
+              className={`bg-black -z-10  absolute transition-all duration-500 ease-in-out hover:scale-105 w-full h-full shadow-md shadow-primary ${
                 activeProject === index ? "scale-110 z-20" : "scale-90 z-10"
               }`}
               style={{
