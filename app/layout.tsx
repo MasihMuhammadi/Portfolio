@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import localFont from "next/font/local";
+import SmoothScroll from "./components/smoothScroll";
+
+const galsod = localFont({
+  src: "./fonts/Galsod.otf",
+  variable: "--font-galsod",
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
+        className={`${galsod.variable} ${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
         <Navbar />
 
@@ -48,6 +55,7 @@ export default function RootLayout({
     `,
           }}
         />
+        <SmoothScroll />
 
         {/* Page Content */}
         <div className="relative z-10">{children}</div>

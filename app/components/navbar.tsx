@@ -8,6 +8,7 @@ import useMenuListAnimation from "./hooks/useNavbarAnimation";
 import PillNav from "./PillaNav";
 import newLogo from "@/public/Group 32.svg";
 import Image from "next/image";
+import Button from "./button";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <div className="flex justify-between items-center p-6 ">
+    <div className="flex sticky top-0 w-full bg-gradient-to-tr from-black/95 to-black z-[1000]  justify-between items-center py-2 px-6 border-b border-b-[rgba(20,120,100,0.4]">
       {/* Logo or Brand */}
       <div className="text-xl font-semibold">
         <Link href="/">
@@ -41,29 +42,66 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Menu */}
-      {/* <nav className="hidden بمخشقف-مثبف mt-5"> */}
-      <nav className="hidden md:flex items-center justify-end mt-5">
-        <PillNav
-          logo=""
-          logoAlt="Company Logo"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Experiences", href: "/experiences" },
-            { label: "Skills", href: "/skills" },
-            { label: "Projects", href: "/projects" },
-            { label: "Contact", href: "/contact" },
-          ]}
-          activeHref="/"
-          className="custom-nav"
-          ease="power2.easeOut"
-          baseColor="#000000"
-          pillColor="rgb(20,120,100)"
-          hoveredPillTextColor="#ffffff"
-          pillTextColor="#000000"
-          // theme=""
-          initialLoadAnimation={false}
-        />
+
+      <nav className="hidden md:flex items-center mt-5 ">
+        <ul className="flex flex-row gap-x-6">
+          <li>
+            <Link
+              href="/"
+              className={`transition-colors duration-200 ${
+                currentPath === "/"
+                  ? "text-primary"
+                  : "text-white hover:text-primary"
+              }`}
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/about"
+              className={`transition-colors duration-200 ${
+                currentPath === "/about"
+                  ? "text-primary"
+                  : "text-white hover:text-primary"
+              }`}
+            >
+              About
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/projects"
+              className={`transition-colors duration-200 ${
+                currentPath.startsWith("/projects")
+                  ? "text-primary"
+                  : "text-white hover:text-primary"
+              }`}
+            >
+              Projects
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/contact"
+              className={`transition-colors duration-200 ${
+                currentPath === "/contact"
+                  ? "text-primary"
+                  : "text-white hover:text-primary"
+              }`}
+            >
+              Contact
+            </Link>
+          </li>
+        </ul>
       </nav>
+      <Link target="_blank" href="https://www.github.com/MasihMuhammadi">
+        <Button className="rounded-lg" type="secondary">
+          Everything
+        </Button>
+      </Link>
       {/* </nav> */}
 
       {/* Burger Icon for Mobile Menu */}

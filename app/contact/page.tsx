@@ -69,8 +69,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="w-[100%] my-1 overflow-x-hidden">
-      {/* <h1>Contact me</h1> */}
+    <div className="w-[100%] my-1 overflow-hidden">
+      {/* <h1>Contact me</h1 > */}
       <div className="flex flex-col-reverse gap-16 lg:flex-row items-center  justify-center md:gap-x-10 lg:gap-x-64 py-10  z-[1000] ">
         <div className="flex flex-col gap-10  ">
           {/* <ContactInfo

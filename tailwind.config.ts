@@ -7,8 +7,22 @@ const config: Config = {
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
   ],
+  
   theme: {
     extend: {
+      animation: {
+      marquee: "marquee 40s linear infinite",
+    },
+     keyframes: {
+      marquee: {
+        "0%": {
+          transform: "translateX(0)",
+        },
+        "100%": {
+          transform: "translateX(-50%)",
+        },
+      },
+    },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

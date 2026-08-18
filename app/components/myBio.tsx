@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import VariableProximity from "./VariableProximity";
 import Button from "./button";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Link from "next/link";
 
 const MyBio = () => {
   const containerRef = useRef(null);
@@ -13,81 +15,75 @@ const MyBio = () => {
       y: e.clientY - rect.top,
     });
   };
+
   return (
-    <div className="flex flex-row gap-y-10 gap-x-3 sm:flex-col lg:flex-row">
+    <div className="flex flex-col  gap-y-4">
+      <div className="inline-block w-fit rounded-xl border border-primary p-1 text-sm text-primary shadow-[0_4px_20px_rgba(20,120,100,0.24)] ">
+        <VariableProximity
+          label="Full-Stack Web Developer"
+          containerRef={containerRef}
+          className="variable-proximity-demo"
+          fromFontVariationSettings="'wght' 400, 'opsz' 9"
+          toFontVariationSettings="'wght' 1000, 'opsz' 40"
+          falloff="linear"
+        />
+      </div>
+
+      <div className="text-[40px] sm:text-[40px] md:text-[50px] lg:text-[60px]  text-center sm:text-left font-galsod leading-none font-light">
+        <p className="">Building Scalable </p>
+        <p className="">Web Application</p>
+        <p>That Solve Real Problems.</p>
+      </div>
+      <p className="w-full sm:w-1/2 text-left">
+        I build production, ready web applications with Next.js, Typescript,
+        Node.js, PostgreSql and MongoDB -- from user interface to backend
+        system.
+      </p>
       <div
         style={{
           position: "relative",
           fontSize: "31px",
           color: "var(--primary)",
         }}
-        className="
-            max-w-[75%] min-w-[80%]
-             sm:max-w-[60%]  sm:min-w-[59%]
-             md:w-full md:max-w-[90%]  md:min-w-[91%]
-              lg:max-w-[50%]  lg:min-w-[54%]
-              xl:max-w-[43%] xl:min-w-[35%]  "
         ref={containerRef}
       >
-        <VariableProximity
-          label={"My Name is masihullah"}
-          containerRef={containerRef}
-          className={"variable-proximity-demo"}
-          fromFontVariationSettings="'wght' 400, 'opsz' 9"
-          toFontVariationSettings="'wght' 1000, 'opsz' 40"
-          radius={100}
-          falloff="linear"
-        />{" "}
-        <VariableProximity
-          label={"Full-Stack Web developer  "}
-          containerRef={containerRef}
-          className={"variable-proximity-demo"}
-          fromFontVariationSettings="'wght' 400, 'opsz' 9"
-          toFontVariationSettings="'wght' 1000, 'opsz' 40"
-          radius={100}
-          falloff="linear"
-        />
         <div className="flex gap-1.5 sm:gap-2 mt-10 ">
-          <Button className="rounded-lg " type="primary">
-            <span className="text-sm ">Book a demo</span>
+          <Button type="primary" className="rounded-lg  ">
+            <span className="text-sm ">View My Work</span>
           </Button>
-          <Button type="primary" className="rounded-lg w-full">
-            <a
-              href="/Masihullah Muhammadi.pdf"
-              download="Masihullah Muhammadi.pdf"
-              className="flex items-center gap-1.5 sm:gap-2"
-            >
-              <span className="text-sm ">Download CV</span>
-            </a>
-          </Button>
+          <a
+            href="/resume.pdf"
+            download
+            className="
+    inline-flex items-center justify-center
+    gap-2
+    rounded-md
+    border border-primary
+    bg-transparent
+    px-5 py-2.5
+    text-sm
+    text-primary
+    transition-all duration-200
+    hover:bg-primary/10
+    hover:shadow-[0_0_20px_rgba(20,120,100,0.15)]
+    active:scale-95
+    whitespace-nowrap
+  "
+          >
+            Download Resume
+          </a>
         </div>
-      </div>
-
-      <div
-        className="spotlight-container h-[200px] hidden md:block"
-        onMouseMove={handleMouseMove}
-        style={
-          {
-            "--x": `${mousePos.x}px`,
-            "--y": `${mousePos.y}px`,
-          } as React.CSSProperties
-        }
-      >
-        <p className="spotlight-text text-3xl text-center flex flex-col items-center ">
-          {`I build modern web applications
-focused on clean UI, performance, and real-world usability.`
-            .split("\n")
-            .map((line, lineIndex) => (
-              <span key={lineIndex}>
-                {line.split(" ").map((word, i) => (
-                  <span key={i} className="word">
-                    {word}{" "}
-                  </span>
-                ))}
-                <br />
-              </span>
-            ))}
-        </p>
+        <div className="flex flex-row gap-x-4 mt-4 text-white ">
+          <a href="https://github.com/MasihMuhammadi" target="_blank">
+            <FaGithub size={24} />
+          </a>
+          <a href="https://www.linkedin.com/in/masihullah-dev/" target="_blank">
+            <FaLinkedin size={24} />
+          </a>
+          {/* <a href="https://github.com/MasihMuhammadi" target="_blank">
+            <FaGithub />
+          </a> */}
+        </div>
       </div>
     </div>
   );

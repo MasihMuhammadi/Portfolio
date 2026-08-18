@@ -15,7 +15,12 @@
   --blackAndWhiteBtn: #000;
   --borders: #000;
 }
-
+@theme {
+  --font-myfont: var(--font-myfont);
+}
+.font-galsod {
+  font-family: var(--font-galsod);
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0f0f0f;
@@ -25,7 +30,9 @@
 html {
   /* cursor: url("/icons8-katana-sword-30.png"), auto; */
   /* position: relative; */
+  
   color: white;
+  scroll-behavior :auto;
   background: rgba(20, 120, 100, 0, 28);
   /* This is the MAGIC */
   -webkit-mask-image: radial-gradient(
@@ -140,12 +147,12 @@ body {
   -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
 }           
 
-#buttons:hover,
+/* #buttons:hover,
 .cursor-pointer:hover,
 button:hover,
-a:hover {
-cursor: url("/icons8-katana-sword-30.png") 20 2, auto;
-}
+a:hover { */
+/* cursor: url("/icons8-katana-sword-30.png") 20 2, auto; */
+/* } */
 
 .skill-card-missile {
   position: relative;
@@ -254,5 +261,19 @@ cursor: url("/icons8-katana-sword-30.png") 20 2, auto;
     transparent 90%
   );
 
-  transition: mask-position 0.1s ease;
+  transition: mask-position 100s ease;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@theme {
+  --animate-marquee: marquee 100s linear infinite;
 }

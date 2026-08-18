@@ -1,60 +1,38 @@
 "use client";
+
 import React from "react";
+
+type ButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+  type?: "primary" | "secondary" | "submit";
+};
 
 const Button = ({
   children,
-  href,
   className = "",
   type = "primary",
-}: {
-  children: React.ReactNode;
-  href?: string;
-  className?: string;
-  type: "submit" | "primary" | "secondary";
-}) => {
+}: ButtonProps) => {
   const baseClasses =
-    "relative overflow-hidden px-4 py-2 rounded-full border border-white/20 bg-transparent cursor-pointer transition-transform duration-200 active:scale-95 group gap-x-2 border-1 border-[rgb(20,120,100)] w-full text-center flex items-center justify-center ";
+    "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap cursor-pointer transition-all duration-200 active:scale-95";
 
-  const content = (
-    <>
-      {/* Background */}
-      <span
-        className="
-          absolute inset-0 w-full
-          bg-[rgb(20,120,100)]
-          pointer-events-none
-          transform -translate-x-full -translate-y-full
-          group-hover:translate-x-0 group-hover:translate-y-0
-          transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-        "
-      />
+  const variants = {
+    primary:
+      "border border-[rgb(20,120,100)] bg-[rgb(20,120,100)] text-white shadow-[0_0_20px_rgba(20,120,100,0.18)] hover:bg-[rgb(20,120,100)]/90 hover:shadow-[0_0_25px_rgba(20,120,100,0.3)]",
 
-      {/* Text - Fixed: added whitespace-nowrap to prevent text wrapping */}
-      <span className="relative z-10 text-white text-sm transition-colors duration-200 flex flex-row gap-x-2 w-full whitespace-nowrap items-center justify-center text-center">
-        {children}
-      </span>
-    </>
-  );
+    secondary:
+      "border border-[rgb(20,120,100)] bg-transparent text-[rgb(20,120,100)] hover:bg-[rgb(20,120,100)]/10 hover:shadow-[0_0_20px_rgba(20,120,100,0.15)]",
 
-  if (href) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`text-center ${baseClasses} ${className}`}
-      >
-        {content}
-      </a>
-    );
-  }
+    submit:
+      "border border-[rgb(20,120,100)] bg-[rgb(20,120,100)] text-white shadow-[0_0_20px_rgba(20,120,100,0.18)] hover:bg-[rgb(20,120,100)]/90 hover:shadow-[0_0_25px_rgba(20,120,100,0.3)]",
+  };
 
   return (
     <button
-      className={` text-center ${baseClasses} ${className}`}
       type={type === "submit" ? "submit" : "button"}
+      className={`${baseClasses} ${variants[type]} ${className}`}
     >
-      {content}
+      {children}
     </button>
   );
 };
