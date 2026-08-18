@@ -11,6 +11,7 @@ import {
 import MyBio from "./myBio";
 import Iu from "@/public/iu.png";
 import craxy from "@/public/craxy.png";
+import aseel from "@/public/aseel.png";
 import { FaArrowRight, FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Button from "./button";
@@ -57,7 +58,7 @@ const LandingPage = () => {
       techs: ["Next.js", "Typescript", "TailwindCss", "MongoDB", "Cloudinary"],
       live: "https://aseelapp.com/do-good",
       github: "https://github.com/MasihMuhmmadi",
-      image: craxy,
+      image: aseel,
     },
     {
       name: "craxy.ai",
