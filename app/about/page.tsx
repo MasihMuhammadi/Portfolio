@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/footer";
 import SkillCardsDesktop from "./skillShared";
 import Image from "next/image";
-// import MagicBento from "./MagicBento";
+
 import primaryImage from "@/public/primaryImage.png";
 import Button from "../components/button";
 
@@ -67,31 +67,6 @@ const MySkills = () => {
       position: { left: "820px", top: "-292px" },
     },
   ];
-
-  // const [animatedSkills, setAnimatedSkills] = useState(skills);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setShowAnimation(true);
-  //   }, 2000);
-  // });
-  // useEffect(() => {
-  //   const timers = animatedSkills.map(
-  //     (skill, index) =>
-  //       setTimeout(
-  //         () => {
-  //           setAnimatedSkills((prevSkills) =>
-  //             prevSkills.map((s, i) =>
-  //               i === index ? { ...s, initialHeight: s.targetHeight } : s,
-  //             ),
-  //           );
-  //         },
-  //         400 + index * 200,
-  //       ), // Staggered delay
-  //   );
-
-  //   return () => timers.forEach((timer) => clearTimeout(timer)); // Cleanup timers
-  // }, []);
 
   return (
     <>

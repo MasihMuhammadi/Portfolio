@@ -22,7 +22,7 @@ import Button from "../components/button";
 const Contact = () => {
   const [formData, setFormData] = useState({
     from_name: "",
-    email: "", // This will serve as reply_to
+    email: "",
     message: "",
   });
 
@@ -165,7 +165,7 @@ const Contact = () => {
               <div
                 className={`mt-2 ${isSubmitting ? "opacity-50 pointer-events-none" : "cursor-pointer"}`}
               >
-                <Button type="submit" disabled={isSubmitting}>
+                <Button type="submit">
                   <div className="flex items-center gap-2">
                     {isSubmitting ? "Sending..." : "Send"}
                     <LuSend size={18} />
