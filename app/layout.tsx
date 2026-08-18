@@ -7,7 +7,7 @@ import localFont from "next/font/local";
 import SmoothScroll from "./components/smoothScroll";
 
 const galsod = localFont({
-  src: "./fonts/Galsod.otf",
+  src: "./fonts/galsod.otf",
   variable: "--font-galsod",
 });
 
